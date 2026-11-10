@@ -124,8 +124,17 @@ export const Footer: React.FC<FooterProps> = ({ dict }) => {
           <div>
             © {new Date().getFullYear()} Swaraj Tours & Travels. {dict.footer.rights}
           </div>
-          <div className="text-brand-saf2/90 font-medium">
-            नांदेड, मराठवाडा आणि महाराष्ट्र पर्यटन सेवा
+          <div className="flex items-center gap-3 text-brand-saf2/90 font-medium">
+            <span>नांदेड, मराठवाडा आणि महाराष्ट्र पर्यटन सेवा</span>
+            <span className="text-gray-600">|</span>
+            <Link
+              href="/admin"
+              className="text-gray-500 hover:text-amber-400 transition-colors inline-flex items-center gap-1 text-[11px]"
+              title="मालक व व्यवस्थापक प्रवेश (Owner Admin Gate)"
+            >
+              <span>🔒</span>
+              <span>ॲडमिन (Admin)</span>
+            </Link>
           </div>
         </div>
       </div>

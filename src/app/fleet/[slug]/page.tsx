@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -23,13 +23,28 @@ import {
 } from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
 import { VEHICLES, getVehicleBySlug } from "@/lib/data/vehicles";
+import { Vehicle } from "@/types";
 
 export default function VehicleDetailPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const vehicle = getVehicleBySlug(params.slug);
+  const [vehicle, setVehicle] = useState<Vehicle | undefined>(() => getVehicleBySlug(params.slug));
+  const [allVehicles, setAllVehicles] = useState<Vehicle[]>(VEHICLES);
+
+  useEffect(() => {
+    fetch("/api/admin/vehicles")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.vehicles) && data.vehicles.length > 0) {
+          setAllVehicles(data.vehicles);
+          const match = data.vehicles.find((v: Vehicle) => v.slug === params.slug || v.id === params.slug);
+          if (match) setVehicle(match);
+        }
+      })
+      .catch(() => {});
+  }, [params.slug]);
 
   if (!vehicle) {
     notFound();
@@ -52,7 +67,7 @@ export default function VehicleDetailPage({
   const driverBhatta = vehicle.driverAllowancePerDay * days;
   const estimatedTotal = baseFare + driverBhatta;
 
-  const otherVehicles = VEHICLES.filter((v) => v.id !== vehicle.id).slice(0, 3);
+  const otherVehicles = allVehicles.filter((v) => v.id !== vehicle.id).slice(0, 3);
 
   return (
     <PageShell>

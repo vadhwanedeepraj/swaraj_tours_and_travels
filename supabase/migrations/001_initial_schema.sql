@@ -51,6 +51,8 @@ create table if not exists public.partners (
 create table if not exists public.vehicles (
     id uuid primary key default uuid_generate_v4(),
     name varchar(100) not null,
+    marathi_name varchar(150),
+    slug varchar(100),
     registration_number varchar(50) unique,
     model_year varchar(10),
     category varchar(50) not null check (category in ('Sedan', 'SUV/MUV', 'Tempo Traveller', 'Luxury Coach', 'Hatchback')),
@@ -60,6 +62,12 @@ create table if not exists public.vehicles (
     ownership_type varchar(30) not null default 'owned' check (ownership_type in ('owned', 'partner')),
     partner_id uuid references public.partners(id) on delete set null,
     base_price_per_km numeric(10,2) default 12.00,
+    driver_allowance numeric(10,2) default 300.00,
+    min_km_per_day integer default 300,
+    primary_image text default '/vehicles/car-1.jpeg',
+    description_en text,
+    description_mr text,
+    status varchar(30) default 'available' check (status in ('available', 'on_request', 'on_trip', 'maintenance')),
     is_active boolean not null default true,
     created_at timestamp with time zone default timezone('utc'::text, now()) not null,
     updated_at timestamp with time zone default timezone('utc'::text, now()) not null
