@@ -24,3 +24,4 @@ create policy "Admins full manage on vehicle_images"
   on public.vehicle_images for all
   using (true)
   with check (true);
+

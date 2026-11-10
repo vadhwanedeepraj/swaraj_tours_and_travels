@@ -123,7 +123,7 @@ export async function GET() {
     }
 
     // Fallback to local dataset
-    const local = readLocalVehicles().filter((v) => v.isAvailable !== false || v.status !== "deleted");
+    const local = readLocalVehicles().filter((v) => v.isAvailable !== false);
     return NextResponse.json({ success: true, vehicles: local, source: "local" });
   } catch (error: any) {
     return NextResponse.json(

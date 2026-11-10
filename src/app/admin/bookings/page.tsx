@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   CalendarCheck,
   Search,
@@ -13,6 +13,8 @@ import {
   Car,
   User,
   ArrowRight,
+  RefreshCw,
+  X,
 } from "lucide-react";
 
 interface BookingRecord {
@@ -34,6 +36,8 @@ interface BookingRecord {
 export default function BookingsManagementPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
+  const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState<string | null>(null);
 
   const [bookings, setBookings] = useState<BookingRecord[]>([
     {
@@ -97,10 +101,45 @@ export default function BookingsManagementPage() {
     },
   ]);
 
-  const updateBookingStatus = (id: string, newStatus: BookingRecord["status"]) => {
+  const fetchBookings = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/admin/bookings", { cache: "no-store" });
+      const data = await res.json();
+      if (data.success && Array.isArray(data.bookings) && data.bookings.length > 0) {
+        setBookings(data.bookings);
+      }
+    } catch (err) {
+      console.error("Failed to load bookings from API:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  const updateBookingStatus = async (id: string, newStatus: BookingRecord["status"]) => {
+    // Optimistic update
     setBookings((prev) =>
       prev.map((b) => (b.id === id ? { ...b, status: newStatus } : b))
     );
+
+    try {
+      const res = await fetch("/api/admin/bookings", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, status: newStatus }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setFeedback("बुकिंग स्थिती यशस्वीरित्या अद्ययावत झाली!");
+        setTimeout(() => setFeedback(null), 3000);
+      }
+    } catch (err) {
+      console.error("Failed to update status in DB:", err);
+    }
   };
 
   const filteredBookings = bookings.filter((b) => {
@@ -116,6 +155,19 @@ export default function BookingsManagementPage() {
 
   return (
     <div className="space-y-6">
+      {/* Toast Notice */}
+      {feedback && (
+        <div className="p-3 bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center justify-between shadow-md animate-in slide-in-from-top-1">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 shrink-0" />
+            <span>{feedback}</span>
+          </div>
+          <button onClick={() => setFeedback(null)} className="p-1 hover:bg-emerald-700 rounded">
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -126,8 +178,17 @@ export default function BookingsManagementPage() {
             ग्राहकांच्या प्रवासाच्या मागण्या तपासा, कोटेशन पाठवा आणि गाड्या नियुक्त करा.
           </p>
         </div>
-        <div className="text-xs font-bold bg-white px-4 py-2 rounded-xl border border-gray-200 text-gray-700 shadow-sm">
-          एकूण नोंदी: <span className="text-brand-saf">{filteredBookings.length}</span>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={fetchBookings}
+            className="p-2.5 bg-white hover:bg-gray-50 border border-gray-200 rounded-xl text-gray-700 shadow-sm transition-colors"
+            title="रीफ्रेश करा"
+          >
+            <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin text-brand-saf" : ""}`} />
+          </button>
+          <div className="text-xs font-bold bg-white px-4 py-2.5 rounded-xl border border-gray-200 text-gray-700 shadow-sm">
+            एकूण नोंदी: <span className="text-brand-saf font-black">{filteredBookings.length}</span>
+          </div>
         </div>
       </div>
 
