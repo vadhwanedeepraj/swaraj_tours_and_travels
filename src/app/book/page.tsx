@@ -154,9 +154,10 @@ function BookingFormContent({ locale }: { locale: "mr" | "en" }) {
   };
 
   // WhatsApp Message Generator
-  const generateWhatsAppUrl = () => {
-    const text = `*New Booking Request - Swaraj Tours & Travels*
+  const generateWhatsAppUrl = (refNumber?: string) => {
+    const text = `*🚩 New Booking Request - Swaraj Tours & Travels*
 ---------------------------------------
+🔖 *Booking Ref:* ${refNumber || "Pending Confirmation"}
 👤 *Name:* ${fullName || "Traveler"}
 📱 *Mobile:* ${mobile || "Not specified"}
 📍 *Pickup:* ${pickupLocation || "Nanded"}
@@ -169,7 +170,7 @@ function BookingFormContent({ locale }: { locale: "mr" | "en" }) {
 🛠️ *Service:* ${serviceType}
 📝 *Notes:* ${additionalRequirements || "None"}
 ---------------------------------------
-Please provide quotation and cab availability.`;
+_Please confirm availability and share driver details._`;
 
     return `https://wa.me/919325232301?text=${encodeURIComponent(text)}`;
   };
@@ -205,6 +206,14 @@ Please provide quotation and cab availability.`;
           bookingNumber: result.bookingNumber,
           message: result.message,
         });
+
+        // Automatically launch WhatsApp addressed to Swaraj Owner
+        const waUrl = generateWhatsAppUrl(result.bookingNumber);
+        try {
+          window.open(waUrl, "_blank", "noopener,noreferrer");
+        } catch {
+          // If pop-up is prevented, the user can still click the WhatsApp button in the confirmation modal
+        }
       } else {
         setServerError(
           result.error ||

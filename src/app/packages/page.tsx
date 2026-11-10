@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -17,9 +17,22 @@ import {
 } from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
 import { TOUR_PACKAGES } from "@/lib/data/packages";
+import { TourPackage } from "@/types";
 
 export default function PackagesPage() {
   const [selectedFilter, setSelectedFilter] = useState<string>("All");
+  const [packagesList, setPackagesList] = useState<TourPackage[]>(TOUR_PACKAGES);
+
+  useEffect(() => {
+    fetch("/api/admin/packages")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.packages) && data.packages.length > 0) {
+          setPackagesList(data.packages);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const filterTabs = [
     { key: "All", en: "All Packages", mr: "सर्व पॅकेजेस" },
@@ -33,7 +46,7 @@ export default function PackagesPage() {
   return (
     <PageShell>
       {({ locale }) => {
-        const filteredPackages = TOUR_PACKAGES.filter((pkg) => {
+        const filteredPackages = packagesList.filter((pkg) => {
           if (selectedFilter === "All") return true;
           if (selectedFilter === "1-Day") return pkg.durationDays === 1;
           return pkg.category === selectedFilter;

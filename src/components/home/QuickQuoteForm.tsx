@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, Calendar, Users, MapPin, Navigation, Car } from "lucide-react";
+import { Send, Calendar, Users, MapPin, Navigation, Car, Phone, User, CheckCircle2 } from "lucide-react";
 import { formatWhatsAppUrl } from "@/lib/utils";
+import { submitBookingEnquiry } from "@/actions/bookings";
 
 interface QuickQuoteFormProps {
   dict: {
@@ -26,6 +27,8 @@ interface QuickQuoteFormProps {
 
 export const QuickQuoteForm: React.FC<QuickQuoteFormProps> = ({ dict }) => {
   const [formData, setFormData] = useState({
+    name: "",
+    mobile: "",
     from: "Nanded",
     to: "",
     date: "",
@@ -35,7 +38,7 @@ export const QuickQuoteForm: React.FC<QuickQuoteFormProps> = ({ dict }) => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successNotice, setSuccessNotice] = useState(false);
+  const [successNotice, setSuccessNotice] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -43,12 +46,32 @@ export const QuickQuoteForm: React.FC<QuickQuoteFormProps> = ({ dict }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleWhatsAppSubmit = (e: React.FormEvent) => {
+  const handleWhatsAppSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // 1. Automatically save enquiry to database
+    try {
+      await submitBookingEnquiry({
+        fullName: formData.name.trim() || "वेबसाईट प्रवासी (Quick Lead)",
+        mobile: formData.mobile.trim() || "9325232301",
+        pickupLocation: formData.from,
+        destination: formData.to,
+        travelDate: formData.date || new Date().toISOString().slice(0, 10),
+        passengers: formData.passengers,
+        vehiclePreference: formData.vehiclePref,
+        serviceType: formData.service,
+        additionalRequirements: "Homepage Quick Quote Submission",
+      });
+    } catch (dbErr) {
+      console.error("Quick quote DB save error:", dbErr);
+    }
+
+    // 2. Open WhatsApp directly addressed to Owner
     const message = `*🚩 Swaraj Tours & Travels - Booking Enquiry*
 ---------------------------------------
+👤 *Name:* ${formData.name || "Customer"}
+📱 *Mobile:* ${formData.mobile || "Direct WhatsApp"}
 📍 *Pickup:* ${formData.from}
 🏁 *Destination:* ${formData.to}
 📅 *Date:* ${formData.date || "Immediate"}
@@ -56,16 +79,16 @@ export const QuickQuoteForm: React.FC<QuickQuoteFormProps> = ({ dict }) => {
 🚗 *Service:* ${formData.service}
 🚘 *Vehicle:* ${formData.vehiclePref}
 ---------------------------------------
-_Please provide the best quotation for this trip._`;
+_Please provide the best quotation and driver availability for this trip._`;
 
     const url = formatWhatsAppUrl("919325232301", message);
     window.open(url, "_blank", "noopener,noreferrer");
 
-    setSuccessNotice(true);
+    setSuccessNotice("तुमची चौकशी नोंदवली गेली आहे व WhatsApp उघडले आहे!");
     setTimeout(() => {
       setIsSubmitting(false);
-      setSuccessNotice(false);
-    }, 4000);
+      setSuccessNotice(null);
+    }, 5000);
   };
 
   return (
@@ -81,12 +104,46 @@ _Please provide the best quotation for this trip._`;
             </p>
           </div>
           <div className="text-xs text-amber-200">
-            कॉल किंवा WhatsApp द्वारे झटपट कोटेशन उपलब्ध: <span className="font-bold text-white">9325232301</span>
+            कॉल किंवा WhatsApp द्वारे झटपट कोटेशन उपलब्ध: <span className="font-bold text-white font-mono">+91 9325232301</span>
           </div>
         </div>
 
         <form onSubmit={handleWhatsAppSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3.5">
+            {/* Customer Name */}
+            <div className="space-y-1">
+              <label className="flex items-center gap-1.5 text-xs font-bold text-amber-100">
+                <User className="w-3.5 h-3.5 text-brand-yellow" />
+                <span>तुमचे नाव</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="उदा. राहुल पाटील"
+                className="w-full h-11 px-3.5 rounded-lg text-gray-900 bg-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-yellow border-0 shadow-inner"
+              />
+            </div>
+
+            {/* Mobile Number */}
+            <div className="space-y-1">
+              <label className="flex items-center gap-1.5 text-xs font-bold text-amber-100">
+                <Phone className="w-3.5 h-3.5 text-brand-yellow" />
+                <span>मोबाईल नंबर *</span>
+              </label>
+              <input
+                type="tel"
+                name="mobile"
+                required
+                maxLength={10}
+                value={formData.mobile}
+                onChange={(e) => setFormData({ ...formData, mobile: e.target.value.replace(/\D/g, "") })}
+                placeholder="9325232301"
+                className="w-full h-11 px-3.5 rounded-lg text-gray-900 bg-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-yellow border-0 shadow-inner font-mono"
+              />
+            </div>
+
             {/* Pickup Location */}
             <div className="space-y-1">
               <label className="flex items-center gap-1.5 text-xs font-bold text-amber-100">
@@ -137,26 +194,7 @@ _Please provide the best quotation for this trip._`;
               />
             </div>
 
-            {/* Passenger Count */}
-            <div className="space-y-1">
-              <label className="flex items-center gap-1.5 text-xs font-bold text-amber-100">
-                <Users className="w-3.5 h-3.5 text-brand-yellow" />
-                <span>{dict.quote.passengers}</span>
-              </label>
-              <select
-                name="passengers"
-                value={formData.passengers}
-                onChange={handleChange}
-                className="w-full h-11 px-3 rounded-lg text-gray-900 bg-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-yellow border-0 shadow-inner"
-              >
-                <option value="1–4">१ ते ४ (Sedan)</option>
-                <option value="5–7">५ ते ७ (SUV/MUV)</option>
-                <option value="8–12">८ ते १२ (Tempo Traveller)</option>
-                <option value="13+">१३ पेक्षा जास्त (Mini Bus)</option>
-              </select>
-            </div>
-
-            {/* Vehicle / Service Type */}
+            {/* Vehicle Preference */}
             <div className="space-y-1">
               <label className="flex items-center gap-1.5 text-xs font-bold text-amber-100">
                 <Car className="w-3.5 h-3.5 text-brand-yellow" />
@@ -168,10 +206,10 @@ _Please provide the best quotation for this trip._`;
                 onChange={handleChange}
                 className="w-full h-11 px-3 rounded-lg text-gray-900 bg-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-yellow border-0 shadow-inner"
               >
-                <option value="Sedan (Hyundai AURA)">Sedan (Hyundai AURA) — 🟢 उपलब्ध (Available)</option>
-                <option value="SUV (Ertiga / XL6)">SUV (Ertiga / XL6) — 🟡 मागणीनुसार (On Request)</option>
-                <option value="Premium (Innova Crysta)">Premium (Innova Crysta) — 🟡 मागणीनुसार (On Request)</option>
-                <option value="Tempo Traveller (13/17/26 Seats)">Tempo Traveller — 🟡 मागणीनुसार (On Request)</option>
+                <option value="Sedan (Hyundai AURA)">Sedan (Hyundai AURA) — 🟢 उपलब्ध</option>
+                <option value="SUV (Maruti Ertiga)">SUV (Maruti Ertiga) — 🟢 उपलब्ध</option>
+                <option value="Luxury (Innova Crysta)">Luxury (Innova Crysta) — 🟡 मागणीनुसार</option>
+                <option value="Tempo Traveller (17 Seats)">Tempo Traveller (17 Seats)</option>
               </select>
             </div>
           </div>
@@ -184,21 +222,27 @@ _Please provide the best quotation for this trip._`;
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1a0c05] hover:bg-black text-white text-sm font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-95 border border-brand-yellow/30 shrink-0"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1a0c05] hover:bg-black text-white text-sm font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-95 border border-brand-yellow/30 shrink-0 disabled:opacity-60"
             >
-              <Send className="w-4 h-4 text-brand-yellow" />
-              <span>{dict.quote.btnSend}</span>
+              {isSubmitting ? (
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <>
+                  <Send className="w-4 h-4 text-brand-yellow" />
+                  <span>{dict.quote.btnSend}</span>
+                </>
+              )}
             </button>
           </div>
         </form>
 
         {successNotice && (
-          <div className="mt-4 p-3 bg-white/10 rounded-lg text-xs text-amber-200 border border-white/20 text-center animate-in fade-in">
-            WhatsApp चॅट उघडले आहे. कृपया प्रवासाची माहिती पाठवा, आमचे प्रतिनिधी तात्काळ संपर्क करतील.
+          <div className="mt-4 p-3 bg-emerald-900/60 rounded-xl text-xs text-emerald-200 border border-emerald-400/40 text-center flex items-center justify-center gap-2 animate-in fade-in">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <span>{successNotice}</span>
           </div>
         )}
       </div>
     </div>
   );
 };
-

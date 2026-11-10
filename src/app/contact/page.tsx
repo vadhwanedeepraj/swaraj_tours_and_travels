@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
 import { CONTACT_FAQS } from "@/lib/data/gallery";
+import { submitBookingEnquiry } from "@/actions/bookings";
 
 // Dynamically import Leaflet Map to avoid SSR issues
 const DynamicNandedMap = dynamic(
@@ -48,16 +49,35 @@ export default function ContactPage() {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const handleMessageSubmit = (e: React.FormEvent) => {
+  const handleMessageSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!contactName.trim() || !contactPhone.trim()) return;
 
+    // Save to Database
+    try {
+      await submitBookingEnquiry({
+        fullName: contactName.trim(),
+        mobile: contactPhone.trim(),
+        pickupLocation: "Nanded Contact Inquiry",
+        destination: contactSubject || "General Travel Inquiry",
+        travelDate: new Date().toISOString().slice(0, 10),
+        passengers: "1–4",
+        serviceType: "Contact Inquiry",
+        additionalRequirements: contactMessage || "Contact Page Enquiry Message",
+      });
+    } catch (dbErr) {
+      console.error("Contact inquiry DB save error:", dbErr);
+    }
+
     // Open WhatsApp with inquiry
-    const text = `*New Contact Enquiry - Swaraj Travels Web*
+    const text = `*🚩 New Contact Enquiry - Swaraj Travels Web*
+---------------------------------------
 👤 *Name:* ${contactName}
 📱 *Phone:* ${contactPhone}
 🏷️ *Topic:* ${contactSubject || "General Travel Inquiry"}
-💬 *Message:* ${contactMessage || "I want to know more about cab bookings."}`;
+💬 *Message:* ${contactMessage || "I want to know more about cab bookings."}
+---------------------------------------
+Please respond on WhatsApp.`;
 
     window.open(
       `https://wa.me/919325232301?text=${encodeURIComponent(text)}`,

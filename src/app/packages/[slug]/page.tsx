@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -22,27 +22,42 @@ import {
 } from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
 import { TOUR_PACKAGES, getPackageBySlug } from "@/lib/data/packages";
+import { TourPackage } from "@/types";
 
 export default function PackageDetailPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const pkg = getPackageBySlug(params.slug);
+  const [pkg, setPkg] = useState<TourPackage | undefined>(() => getPackageBySlug(params.slug));
+  const [allPackages, setAllPackages] = useState<TourPackage[]>(TOUR_PACKAGES);
+
+  useEffect(() => {
+    fetch("/api/admin/packages")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.packages) && data.packages.length > 0) {
+          setAllPackages(data.packages);
+          const found = data.packages.find((p: TourPackage) => p.slug === params.slug);
+          if (found) setPkg(found);
+        }
+      })
+      .catch(() => {});
+  }, [params.slug]);
 
   if (!pkg) {
     notFound();
   }
 
   const [selectedVehicle, setSelectedVehicle] = useState(
-    pkg.recommendedVehicles[0]?.vehicleName || "Swift Dzire"
+    pkg.recommendedVehicles?.[0]?.vehicleName || "Swift Dzire"
   );
 
   const activeVehicleQuote =
-    pkg.recommendedVehicles.find((v) => v.vehicleName === selectedVehicle) ||
-    pkg.recommendedVehicles[0];
+    pkg.recommendedVehicles?.find((v) => v.vehicleName === selectedVehicle) ||
+    pkg.recommendedVehicles?.[0];
 
-  const otherPackages = TOUR_PACKAGES.filter((p) => p.slug !== pkg.slug).slice(
+  const otherPackages = allPackages.filter((p) => p.slug !== pkg.slug).slice(
     0,
     3
   );
