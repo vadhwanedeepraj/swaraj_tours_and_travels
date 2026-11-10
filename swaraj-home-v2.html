@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Swaraj Tours & Travels – Nanded | Homepage prototype v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--saf:#D9480F;--saf2:#FF7A1A;--gold:#C98A0B;--tint:#FFF3E6;--bg:#fff;--text:#2A1507;--muted:#6b513f;--line:#f0dcc8;--card:#fff;--dark:#3B1305;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d0e06;--tint:#2a1509;--text:#fbeee0;--muted:#cdb199;--line:#4a2a16;--card:#2a1509}}
+:root[data-theme="dark"]{--bg:#1d0e06;--tint:#2a1509;--text:#fbeee0;--muted:#cdb199;--line:#4a2a16;--card:#2a1509}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 74px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 Poppins,"Noto Sans Devanagari",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--saf);z-index:50}
+.mr{font-family:"Noto Sans Devanagari",Poppins,sans-serif}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+.top{background:var(--saf);color:#fff;text-align:center;font-size:13px;padding:5px 10px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--bg);border-bottom:3px solid var(--saf2)}
+.bar{display:flex;align-items:center;gap:20px;height:66px}
+.logo{display:flex;flex-direction:column;line-height:1.1;font-weight:700;font-size:19px;color:var(--saf)}
+.logo small{font-weight:500;font-size:11px;color:var(--muted)}
+nav{margin-left:auto;display:flex;gap:22px;font-size:14px;font-weight:500}
+nav a:hover{color:var(--saf)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 24px;border-radius:999px;border:0;font:600 15px Poppins,sans-serif;cursor:pointer;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn-saf{background:var(--saf);color:#fff}.btn-saf:hover{background:#b83a09}
+.btn-out{border:2px solid var(--saf);color:var(--saf);background:transparent}
+.lang{background:transparent;color:var(--text);border:1px solid var(--line);border-radius:6px;padding:4px 10px;font:500 13px Poppins;cursor:pointer}
+.menu{display:none;margin-left:auto;background:none;border:0;color:var(--text);font-size:26px}
+.hero{background:linear-gradient(180deg,var(--bg) 0%,var(--tint) 100%);padding:48px 0 0;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.hero h1{margin:0 0 12px;font-size:clamp(38px,6vw,72px);line-height:1.14;font-weight:800}
+.hero h1 span{display:block;color:var(--saf)}
+.hero p{max-width:46ch;color:var(--muted);margin:0 0 26px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.stage{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:10px}
+.frame{width:min(300px,64%);aspect-ratio:3/4;border:5px solid var(--gold);outline:3px solid var(--saf);outline-offset:4px;border-radius:150px 150px 10px 10px;background:linear-gradient(160deg,#fff3e6,#ffd9b3);display:grid;place-items:center;text-align:center;padding:24px;font-size:13px;color:var(--muted);overflow:hidden}
+.frame img{width:100%;height:100%;object-fit:cover}
+.flag{width:min(130px,28%);transform-origin:12% 50%;animation:sway 3.5s ease-in-out infinite alternate}
+@keyframes sway{from{transform:skewY(-2deg)}to{transform:skewY(2deg)}}
+.fort{height:26px;margin-top:40px;background:linear-gradient(var(--saf),var(--saf)) bottom/100% 14px no-repeat,repeating-linear-gradient(90deg,var(--saf) 0 22px,transparent 22px 38px)}
+.qwrap{margin-top:-1px;background:var(--saf);padding:22px 0}
+.q{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:12px;align-items:end}
+.q label{display:grid;gap:4px;font-size:12px;font-weight:500;color:#ffe9d6}
+.q input,.q select{min-height:46px;border:0;border-radius:10px;padding:0 12px;background:#fff;color:#2A1507;font:400 15px Poppins,sans-serif}
+.q .btn{background:var(--dark);color:#fff}
+.qh{color:#fff;font-weight:600;margin:0 0 10px}
+.note{font-size:12px;color:#ffe9d6;margin:10px 0 0}
+section{padding:66px 0}section.alt{background:var(--tint)}
+h2.t{margin:0 0 6px;font-size:clamp(26px,3.6vw,36px);line-height:1.2;color:var(--text)}
+h2.t::after{content:"";display:block;width:64px;height:4px;margin-top:8px;background:var(--saf2);border-radius:2px}
+.sub{margin:10px 0 28px;color:var(--muted);max-width:60ch}
+.grid{display:grid;gap:16px}.g5{grid-template-columns:repeat(5,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 16px;font-weight:600;font-size:15px;border-top:4px solid var(--saf2)}
+.car{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ph{aspect-ratio:16/10;background:linear-gradient(135deg,#ffd9b3,#ffb877);display:grid;place-items:center;color:#7a3a10;font-size:13px;text-align:center;padding:10px}
+.car .b{padding:18px}.car h3{margin:0 0 4px;font-size:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px;font-size:13px;color:var(--muted)}
+.chips span{border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.link{color:var(--saf);font-weight:600;font-size:14px}
+.dest{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:12px;padding:20px}
+.dest b{display:block;font-size:17px}.dest small{color:var(--muted)}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:0;margin:0}
+.steps li{list-style:none;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--saf);color:#fff;font-weight:700;margin-bottom:10px}
+.empty{border:2px dashed var(--line);border-radius:14px;padding:30px;text-align:center;color:var(--muted)}
+.band{background:linear-gradient(90deg,var(--saf),var(--saf2));color:#fff;text-align:center;padding:50px 0}
+.band h2{margin:0 0 8px;font-size:clamp(24px,3.4vw,34px)}
+.band .btn{background:#fff;color:var(--saf);margin-top:14px}
+footer{background:var(--dark);color:#e8cdb6;padding:44px 0 90px;font-size:14px}
+footer .grid{grid-template-columns:2fr 1fr 1fr}
+footer h4{color:#fff;margin:0 0 10px}footer a{display:block;padding:3px 0}
+.jai{margin-top:14px;color:#ffc58a;font-weight:700}
+.mbar{display:none}
+@media (max-width:900px){
+nav{display:none;position:absolute;top:66px;left:0;right:0;background:var(--bg);flex-direction:column;padding:16px 20px;gap:14px;border-bottom:3px solid var(--saf2)}
+nav.open{display:flex}.menu{display:block}.bar>.btn{display:none}
+.hero .wrap{grid-template-columns:1fr}.q{grid-template-columns:1fr 1fr}.q .btn{grid-column:1/-1}
+.g5,.g4{grid-template-columns:repeat(2,1fr)}.g3,.steps{grid-template-columns:1fr}footer .grid{grid-template-columns:1fr}
+.mbar{display:grid;grid-template-columns:1fr 1fr 1.3fr;position:fixed;left:0;right:0;bottom:0;z-index:45;background:var(--bg);border-top:3px solid var(--saf2);padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));gap:8px}
+.mbar a{display:grid;place-items:center;min-height:44px;border-radius:10px;font-weight:600;font-size:14px;border:1px solid var(--line)}
+.mbar a.r{background:var(--saf);color:#fff;border-color:var(--saf)}
+}
+@media (prefers-reduced-motion:reduce){.flag{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="top mr">॥ जय भवानी ॥ जय शिवाजी ॥</div>
+<header><div class="wrap bar">
+<a class="logo" href="#top"><span class="mr">स्वराज टुर्स अँड ट्रॅव्हल्स</span><small>Swaraj Tours & Travels · Nanded</small></a>
+<nav id="nav" aria-label="Main">
+<a href="#top" data-i="n1">Home</a><a href="#about" data-i="n2">About Us</a><a href="#fleet" data-i="n3">Our Fleet</a><a href="#services" data-i="n4">Services</a><a href="#packages" data-i="n5">Tour Packages</a><a href="#gallery" data-i="n6">Gallery</a><a href="#contact" data-i="n7">Contact Us</a>
+</nav>
+<button class="lang" id="lang" aria-label="Switch language">मराठी</button>
+<a class="btn btn-saf" href="#book" data-i="book">Book Your Ride</a>
+<button class="menu" id="menu" aria-label="Open menu" aria-expanded="false">☰</button>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+<div>
+<h1 class="mr"><span style="color:var(--text)" data-i="h1">प्रवास सुखकर...</span><span data-i="h2">आमची जबाबदारी...!</span></h1>
+<p data-i="lead">Cars, taxis and tour packages from Nanded, for local trips, outstation journeys, weddings and family holidays.</p>
+<div class="cta"><a class="btn btn-saf" href="#book" data-i="book">Book Your Ride</a><a class="btn btn-out" href="https://wa.me/919325232301?text=Hello%20Swaraj%20Tours%20%26%20Travels%2C%20I%20need%20a%20cab." target="_blank" rel="noopener">WhatsApp 9325232301</a></div>
+</div>
+<div class="stage">
+<div class="frame mr" id="portrait">Portrait of<br>Chhatrapati Shivaji Maharaj<br>(photo to be added)</div>
+<svg class="flag" viewBox="0 0 220 280" aria-label="Bhagwa flag" role="img"><rect x="14" y="8" width="7" height="268" rx="3" fill="#6b3a12"/><circle cx="17.5" cy="8" r="7" fill="#C98A0B"/><path d="M21 28 L212 88 L156 118 L212 148 L21 208 Z" fill="#FF7A1A"/></svg>
+</div>
+</div><div class="fort" aria-hidden="true"></div></div>
+
+<div class="qwrap" id="book"><div class="wrap">
+<p class="qh" data-i="qt">Get a quotation</p>
+<form class="q" id="qf">
+<label>Pickup location<input name="from" required placeholder="e.g. Nanded station" autocomplete="off"></label>
+<label>Destination<input name="to" required placeholder="e.g. Shirdi" autocomplete="off"></label>
+<label>Travel date<input type="date" name="date" required></label>
+<label>Passengers<select name="pax"><option>1–4</option><option>5–7</option><option>8–12</option><option>13+</option></select></label>
+<button class="btn" type="submit" data-i="send">Send on WhatsApp</button>
+</form>
+<p class="note">Prototype: the live form will save your request and our team will send a quotation. Final price is confirmed by us.</p>
+</div></div>
+
+<section id="services"><div class="wrap">
+<h2 class="t" data-i="s_t">What we do</h2><p class="sub">One call or one form for every kind of trip.</p>
+<div class="grid g5">
+<div class="svc">Local car rental</div><div class="svc">Outstation trips</div><div class="svc">One-way & round trip</div><div class="svc">Airport & railway transfers</div><div class="svc">Wedding transport</div>
+<div class="svc">Family trips</div><div class="svc">Picnic packages</div><div class="svc">Tourism & sightseeing</div><div class="svc">Corporate travel</div><div class="svc">Custom packages</div>
+</div></div></section>
+
+<section class="alt" id="fleet"><div class="wrap">
+<h2 class="t" data-i="f_t">Choose your vehicle</h2><p class="sub">Owned and partner vehicles. These cards are layout samples; real vehicles, photos and rates come from the admin panel.</p>
+<div class="grid g3">
+<article class="car"><div class="ph">Vehicle photo<br>(added by admin)</div><div class="b"><h3>Sedan</h3><div class="chips"><span>4 seats</span><span>AC</span><span>2 bags</span></div><a class="link" href="#book">Request this vehicle</a></div></article>
+<article class="car"><div class="ph">Vehicle photo<br>(added by admin)</div><div class="b"><h3>SUV / MUV</h3><div class="chips"><span>6–7 seats</span><span>AC</span><span>3 bags</span></div><a class="link" href="#book">Request this vehicle</a></div></article>
+<article class="car"><div class="ph">Vehicle photo<br>(added by admin)</div><div class="b"><h3>Tempo Traveller</h3><div class="chips"><span>12+ seats</span><span>AC</span><span>Large luggage</span></div><a class="link" href="#book">Request this vehicle</a></div></article>
+</div></div></section>
+
+<section id="packages"><div class="wrap">
+<h2 class="t" data-i="d_t">Popular journeys from Nanded</h2><p class="sub">Destinations to be confirmed with you. Itineraries and prices will be added in the admin panel.</p>
+<div class="grid g4">
+<div class="dest"><b>Shirdi</b><small>Darshan trip</small></div><div class="dest"><b>Tuljapur</b><small>Pilgrimage</small></div>
+<div class="dest"><b>Chhatrapati Sambhajinagar</b><small>Ajanta, Ellora, city tour</small></div><div class="dest"><b>Hyderabad</b><small>Outstation</small></div>
+</div></div></section>
+
+<section class="alt" id="about"><div class="wrap">
+<h2 class="t" data-i="h_t">How booking works</h2><p class="sub">No online payment at the start. We confirm every booking personally.</p>
+<ol class="steps">
+<li><b>Send your request</b><br>Fill the form or message us.</li><li><b>We check availability</b><br>We match a vehicle to your trip.</li><li><b>You get a quotation</b><br>Clear price, no surprises.</li><li><b>You confirm</b><br>Your booking is confirmed.</li>
+</ol></div></section>
+
+<section id="gallery"><div class="wrap">
+<h2 class="t">Trips and reviews</h2><p class="sub">Photos of past trips and real customer reviews will appear here.</p>
+<div class="empty">No trips published yet. Add the first trip and review from the admin panel.</div>
+</div></section>
+
+<div class="band"><div class="wrap"><h2 data-i="c_t">Planning a trip? Tell us where.</h2><div>We reply with a quotation.</div><a class="btn" href="#book" data-i="book">Book Your Ride</a></div></div>
+</main>
+
+<footer id="contact"><div class="wrap grid">
+<div><h4 class="mr">स्वराज टुर्स अँड ट्रॅव्हल्स</h4>Car rental, taxi, outstation and tour packages.<br>Nanded, Maharashtra, India<br><span class="mr">प्रवास सुखकर... आमची जबाबदारी...!</span><div class="jai mr">॥ जय भवानी ॥ जय शिवाजी ॥</div></div>
+<div><h4>Contact</h4><a href="tel:+919325232301">Call 9325232301</a><a href="https://wa.me/919325232301" target="_blank" rel="noopener">WhatsApp</a></div>
+<div><h4>Explore</h4><a href="#fleet">Our fleet</a><a href="#services">Services</a><a href="#packages">Tour packages</a></div>
+</div></footer>
+
+<div class="mbar"><a href="tel:+919325232301">Call</a><a href="https://wa.me/919325232301" target="_blank" rel="noopener">WhatsApp</a><a class="r" href="#book" data-i="book">Book Your Ride</a></div>
+
+<script>
+const T={mr:{n1:"मुख्यपृष्ठ",n2:"आमच्याबद्दल",n3:"आमच्या गाड्या",n4:"सेवा",n5:"टूर पॅकेजेस",n6:"गॅलरी",n7:"संपर्क",book:"आत्ताच बुक करा",lead:"नांदेडपासून कार, टॅक्सी आणि टूर पॅकेजेस: स्थानिक प्रवास, आउटस्टेशन, लग्न आणि कौटुंबिक सहली.",qt:"भाड्याची माहिती मिळवा",send:"WhatsApp वर पाठवा",s_t:"आमच्या सेवा",f_t:"तुमची गाडी निवडा",d_t:"नांदेडहून लोकप्रिय प्रवास",h_t:"बुकिंग कसे होते",c_t:"प्रवासाचा बेत आहे? कुठे ते सांगा."}};
+const els=[...document.querySelectorAll("[data-i]")];els.forEach(e=>e.dataset.en=e.textContent);
+const lb=document.getElementById("lang");let mr=false;
+lb.onclick=()=>{mr=!mr;document.documentElement.lang=mr?"mr":"en";els.forEach(e=>{const k=e.dataset.i;e.textContent=(mr&&T.mr[k])?T.mr[k]:e.dataset.en});lb.textContent=mr?"English":"मराठी"};
+const nav=document.getElementById("nav"),mb=document.getElementById("menu");
+mb.onclick=()=>{const o=nav.classList.toggle("open");mb.setAttribute("aria-expanded",o)};
+nav.querySelectorAll("a").forEach(a=>a.onclick=()=>nav.classList.remove("open"));
+document.getElementById("qf").addEventListener("submit",e=>{e.preventDefault();const d=new FormData(e.target);
+const m=`Hello Swaraj Tours & Travels, I need a quotation.\nFrom: ${d.get("from")}\nTo: ${d.get("to")}\nDate: ${d.get("date")}\nPassengers: ${d.get("pax")}`;
+window.open("https://wa.me/919325232301?text="+encodeURIComponent(m),"_blank","noopener")});
+</script>
+</body>
+</html>

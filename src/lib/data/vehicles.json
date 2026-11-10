@@ -1,0 +1,279 @@
+[
+  {
+    "id": "hyundai-aura",
+    "slug": "hyundai-aura",
+    "name": "Hyundai AURA",
+    "marathiName": "ह्युंदाई ऑरा (Hyundai AURA)",
+    "category": "Sedan",
+    "regNumber": "MH-26-BE-1001",
+    "seats": "४+१ प्रवासी (4+1 Seats)",
+    "ac": true,
+    "luggage": "२ मोठी बॅग्ज + २ हँडबॅग्ज (2 Large Bags)",
+    "image": "/vehicles/car-1.jpeg",
+    "additionalImages": [
+      "/vehicles/car-1.jpeg",
+      "/branding/banner.jpeg"
+    ],
+    "descriptionEn": "Brand new, comfortable and fuel-efficient Hyundai AURA sedan with powerful air conditioning and smooth highway suspension. The most reliable and economical choice for local Nanded rides and outstation travel.",
+    "descriptionMr": "उत्तम स्थितीतील ह्युंदाई ऑरा (Hyundai AURA) वातानुकूलित सेडान कार. पॉवरफुल कुलिंग एसी, स्मूथ सस्पेंशन आणि आरामदायी बैठक व्यवस्था. स्थानिक प्रवास, विमानतळ पिकअप आणि आंतरशहर प्रवासासाठी सध्या लगेच उपलब्ध.",
+    "ownership": "owned",
+    "ratePerKm": 11,
+    "minKmPerDay": 300,
+    "driverAllowancePerDay": 300,
+    "isAvailable": true,
+    "status": "available",
+    "featuresEn": [
+      "Chilled Dual Air Conditioning",
+      "Plush cushioned seating comfort",
+      "Bluetooth & AUX audio system",
+      "Large dedicated boot space",
+      "Sanitized & vacuumed daily",
+      "Fastag enabled for fast toll clearance"
+    ],
+    "featuresMr": [
+      "पॉवरफुल कुलिंग एसी (AC)",
+      "आरामदायी पुशबॅक सीट्स",
+      "म्युझिक सिस्टीम (Bluetooth/AUX)",
+      "विशाल बुट स्पेस सामान ठेवण्यासाठी",
+      "नियमित सॅनिटाईज केलेली गाडी",
+      "टोल नाक्यांवर फास्टॅगची सोय"
+    ],
+    "bestForEn": "Couples, small families of 4, solo business executives, local city trips.",
+    "bestForMr": "लहान कुटुंब (४ जण), व्यापारी दौरे, लोकल नांदेड व १-२ दिवसांचे प्रवास.",
+    "popularRoutes": [
+      "Nanded to Shirdi",
+      "Nanded to Hyderabad",
+      "Nanded to Sambhajinagar",
+      "Nanded Local"
+    ]
+  },
+  {
+    "id": "maruti-ertiga",
+    "slug": "maruti-ertiga",
+    "name": "Maruti Suzuki Ertiga / XL6",
+    "marathiName": "मारुती सुझुकी अर्टिगा / XL6",
+    "category": "SUV/MUV",
+    "regNumber": "MH-26-BE-1002",
+    "seats": "६+१ प्रवासी (6+1 Seats)",
+    "ac": true,
+    "luggage": "३ मोठी बॅग्ज + रूफ करिअर (Roof Carrier)",
+    "image": "/vehicles/car-2.jpeg",
+    "additionalImages": [
+      "/vehicles/car-2.jpeg",
+      "/branding/banner.jpeg"
+    ],
+    "descriptionEn": "Versatile and highly spacious 7-seater MUV with dual AC vents. Perfect for mid-sized families, pilgrimage tours, and outstation highway travel with comfort.",
+    "descriptionMr": "मध्यम कुटुंबे आणि मित्रांच्या समूहासाठी ६+१ सीटर उत्तम गाडी. दुहेरी एसी, रूफ करिअर आणि उत्कृष्ट मायलेजमुळे देवदर्शन व लांबच्या प्रवासासाठी सर्वांची पहिली पसंती.",
+    "ownership": "owned",
+    "ratePerKm": 14,
+    "minKmPerDay": 300,
+    "driverAllowancePerDay": 350,
+    "isAvailable": false,
+    "status": "on_request",
+    "featuresEn": [
+      "Dual Air Conditioning (Front & Rear vents)",
+      "Spacious 3-row seating arrangement",
+      "Overhead luggage carrier for extra bags",
+      "USB mobile charging points",
+      "Comfortable suspension for rural & ghat roads",
+      "Professional polite driver"
+    ],
+    "featuresMr": [
+      "ड्युअल एसी (मागील प्रवाशांसाठी स्वतंत्र कुलिंग)",
+      "विशाल ३-रांगांची बैठक व्यवस्था",
+      "छतावर सुरक्षित रूफ करिअर",
+      "मोबाईल चार्जिंग पॉईंट्स",
+      "घाट व ग्रामीण रस्त्यांवर सुखकर प्रवास",
+      "अनुभवी व विनम्र चालक"
+    ],
+    "bestForEn": "Family vacations of 5-6 persons, pilgrimage tours to Shirdi & Tuljapur.",
+    "bestForMr": "५ ते ६ जणांचे कुटुंब, शिर्डी-तुळजापूर-माहूर देवदर्शन यात्रा आणि लग्नकार्य.",
+    "popularRoutes": [
+      "Nanded to Tuljapur",
+      "Nanded to Mahurgad",
+      "Nanded to Pune",
+      "Nanded to Shirdi"
+    ]
+  },
+  {
+    "id": "innova-crysta",
+    "slug": "innova-crysta",
+    "name": "Toyota Innova Crysta",
+    "marathiName": "टोयोटा इनोव्हा क्रिस्टा (प्रीमियम)",
+    "category": "Luxury Coach",
+    "regNumber": "MH-26-BE-1003",
+    "seats": "७+१ प्रवासी (7+1 Seats)",
+    "ac": true,
+    "luggage": "४ मोठी बॅग्ज + लगेज स्पेस (4-5 Large Bags)",
+    "image": "/vehicles/car-3.jpeg",
+    "additionalImages": [
+      "/vehicles/car-3.jpeg",
+      "/branding/banner.jpeg"
+    ],
+    "descriptionEn": "The undisputed king of Indian highway comfort. Luxurious captain seats, whisper-quiet cabin, top-tier suspension, and ultimate safety for long-distance journeys.",
+    "descriptionMr": "हायवे प्रवासाची निर्विवाद राजा मानली जाणारी गाडी. व्हिआयपी कॅप्टन सीट्स, अत्याधुनिक सस्पेंशन, शांत केबिन आणि लांबच्या प्रवासात शून्य थकवा देणारी आरामदायक लक्झरी गाडी.",
+    "ownership": "partner",
+    "ratePerKm": 18,
+    "minKmPerDay": 300,
+    "driverAllowancePerDay": 400,
+    "isAvailable": false,
+    "status": "on_request",
+    "featuresEn": [
+      "VIP Reclining Captain Seats",
+      "Individual Climate Control AC",
+      "Whisper-quiet highway ride",
+      "Large dedicated boot space",
+      "Premium upholstery and ambient lighting",
+      "Airbags & ABS advanced safety standards"
+    ],
+    "featuresMr": [
+      "व्हीआयपी रेक्लायनिंग कॅप्टन सीट्स",
+      "स्वतंत्र क्लायमेट कंट्रोल एसी",
+      "हायवेवर अतिशय शांत आणि स्थिर प्रवास",
+      "मोठी डिकी व लगेज स्पेस",
+      "प्रीमियम इंटिरिअर आणि आरामदायक जागा",
+      "एअरबॅग्ज आणि प्रगत सुरक्षा मानके"
+    ],
+    "bestForEn": "VIP guests, corporate travel, wedding grooms, long-distance interstate tours.",
+    "bestForMr": "व्हीआयपी पाहुणे, कॉर्पोरेट डेलिगेट्स, लग्नकार्यात वऱ्हाडी/नवरदेव, लांब पल्ल्याचे दौरे.",
+    "popularRoutes": [
+      "Nanded to Hyderabad Airport",
+      "Nanded to Mumbai",
+      "Nanded to Goa",
+      "Nanded to Nagpur"
+    ]
+  },
+  {
+    "id": "tempo-traveller-20",
+    "slug": "tempo-traveller-20",
+    "name": "Luxury Tempo Traveller (20 Seater)",
+    "marathiName": "लक्झरी टेम्पो ट्रॅव्हलर (२० सीटर)",
+    "category": "Tempo Traveller",
+    "regNumber": "MH-26-BE-1005",
+    "seats": "२०+१ प्रवासी (20+1 Seats)",
+    "ac": true,
+    "luggage": "१५+ बॅग्ज (Spacious Luggage Trunk)",
+    "image": "/branding/banner.jpeg",
+    "additionalImages": [
+      "/branding/banner.jpeg",
+      "/vehicles/car-1.jpeg"
+    ],
+    "descriptionEn": "Extra large 20-seater group tourist vehicle with ultra-plush seating, ambient lighting, separate driver partition, and full air conditioning.",
+    "descriptionMr": "२० प्रवाशांसाठी भव्य लक्झरी टेम्पो ट्रॅव्हलर. जादा लेगरूम, मखमली पुशबॅक सीट्स, रात्रीच्या प्रवासासाठी सुंदर ॲम्बियंट लाईटिंग आणि दर्जेदार ड्रायव्हर.",
+    "ownership": "partner",
+    "ratePerKm": 27,
+    "minKmPerDay": 300,
+    "driverAllowancePerDay": 500,
+    "isAvailable": false,
+    "status": "on_request",
+    "featuresEn": [
+      "Plush 20-seater luxury configuration",
+      "Large panoramic windows with curtains",
+      "High capacity AC blower for all rows",
+      "Heavy duty roof rack & luggage trunk",
+      "Reading lights and charging docks",
+      "First aid and fire safety equipment"
+    ],
+    "featuresMr": [
+      "२० सीट्सची आरामदायक बैठक व्यवस्था",
+      "मोठ्या खिडक्या व पडदे (Panoramic View)",
+      "प्रत्येक रांगेसाठी स्वतंत्र एसी फ्लो",
+      "विशाल रूफ रॅक आणि लगेज ट्रंक",
+      "प्रत्येक सीटजवळ चार्जिंग व रीडिंग लाईट",
+      "प्रथमोपचार व सुरक्षिततेची पूर्ण खात्री"
+    ],
+    "bestForEn": "Community group yatras, wedding transport, large corporate retreats.",
+    "bestForMr": "संस्था व मंडळ यात्रा, लग्नकार्यासाठी नातेवाईक, कॉर्पोरेट सहली.",
+    "popularRoutes": [
+      "Nanded to Mahurgad-Shegaon",
+      "Nanded to Ramoji Film City Hyderabad",
+      "Nanded to Tirupati"
+    ]
+  },
+  {
+    "id": "luxury-mini-bus",
+    "slug": "luxury-mini-bus",
+    "name": "Luxury Tourist Coach / Bus (32 Seater)",
+    "marathiName": "लक्झरी टुरिस्ट कोच / मिनी बस (३२ सीटर)",
+    "category": "Luxury Coach",
+    "regNumber": "MH-26-BE-1006",
+    "seats": "३२ प्रवासी (32 Seater AC Coach)",
+    "ac": true,
+    "luggage": "२५+ बॅग्ज (Under-belly Storage)",
+    "image": "/branding/banner.jpeg",
+    "additionalImages": [
+      "/branding/banner.jpeg",
+      "/vehicles/car-3.jpeg"
+    ],
+    "descriptionEn": "Full-scale air-conditioned 32-seater luxury tourist bus. Built for school/college tours, large wedding guest convoys, and multi-state heritage journeys.",
+    "descriptionMr": "३२ सीट्सची भव्य वातानुकूलित लक्झरी बस. शाळा/महाविद्यालयीन सहली, लग्नकार्यातील मोठा समुदाय आणि बहु-दिवसीय पर्यटन दौऱ्यांसाठी परिपूर्ण निवड.",
+    "ownership": "partner",
+    "ratePerKm": 36,
+    "minKmPerDay": 350,
+    "driverAllowancePerDay": 700,
+    "isAvailable": false,
+    "status": "on_request",
+    "featuresEn": [
+      "Air suspension for smooth vibration-free travel",
+      "High-definition PA audio mic system",
+      "Under-belly huge luggage bays",
+      "Emergency exits and speed governor compliant",
+      "Reclining wide seats with footrests",
+      "Uniformed experienced heavy-vehicle chauffeurs"
+    ],
+    "featuresMr": [
+      "एअर सस्पेंशन – हादरे न बसता अत्यंत गुळगुळीत प्रवास",
+      "माईक व साऊंड सिस्टीम गाइड/समालोचनासाठी",
+      "खालील बाजूस भव्य लगेज डिकी",
+      "आपत्कालीन दरवाजे व स्पीड गव्हर्नर सुसज्ज",
+      "रेक्लायनिंग आरामदायक सीट्स व फूटरेस्ट",
+      "अनुभवी आणि प्रशिक्षित हेवी व्हेईकल चालक"
+    ],
+    "bestForEn": "School picnics, educational tours, grand weddings, multi-day interstate pilgrimages.",
+    "bestForMr": "शालेय सहली, शैक्षणिक दौरे, मोठी लग्ने आणि आंतरराज्य देवदर्शन यात्रा.",
+    "popularRoutes": [
+      "Nanded to Ashtavinayak Yatra",
+      "Nanded to Konkan Tour",
+      "Nanded to Karnataka / Telangana"
+    ]
+  },
+  {
+    "id": "v-1794333215157",
+    "slug": "hyundai-aura",
+    "name": "Hyundai Aura",
+    "marathiName": "Hyundai Aura",
+    "regNumber": "MH-26-AG-1503",
+    "category": "Sedan",
+    "seats": "४+१ प्रवासी (4+1 Seats)",
+    "ac": true,
+    "luggage": "२ मोठी बॅग्ज",
+    "image": "/vehicles/car-1.jpeg",
+    "additionalImages": [
+      "/vehicles/car-1.jpeg"
+    ],
+    "descriptionEn": "Comfortable vehicle for local and outstation trips.",
+    "descriptionMr": "स्थानिक व आउटस्टेशन प्रवासासाठी आरामदायी गाडी.",
+    "ownership": "owned",
+    "ratePerKm": 12,
+    "minKmPerDay": 300,
+    "driverAllowancePerDay": 200,
+    "isAvailable": true,
+    "status": "available",
+    "featuresEn": [
+      "AC",
+      "Audio System",
+      "Clean Interiors"
+    ],
+    "featuresMr": [
+      "एसी",
+      "म्युझिक सिस्टीम",
+      "स्वच्छ केबिन"
+    ],
+    "bestForEn": "Family trips and tours.",
+    "bestForMr": "कौटुंबिक सहली आणि प्रवास.",
+    "popularRoutes": [
+      "Nanded Local",
+      "Nanded to Shirdi"
+    ]
+  }
+]

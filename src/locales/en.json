@@ -1,0 +1,106 @@
+{
+  "topBanner": "॥ Jai Bhavani ॥ Jai Shivaji ॥",
+  "brand": {
+    "name": "Swaraj Tours & Travels",
+    "sub": "Swaraj Tours & Travels · Nanded",
+    "tagline": "Comfortable Journey... Our Responsibility...!"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "fleet": "Our Fleet",
+    "services": "Services",
+    "packages": "Tour Packages",
+    "gallery": "Gallery",
+    "contact": "Contact Us",
+    "bookRide": "Book Your Ride"
+  },
+  "hero": {
+    "titlePart1": "Comfortable Journey...",
+    "titlePart2": "Our Responsibility...!",
+    "lead": "Premium cars, taxis, and tour packages from Nanded for local trips, outstation journeys, weddings, and family vacations.",
+    "bookBtn": "Book Your Ride",
+    "whatsappBtn": "WhatsApp 9325232301",
+    "portraitAlt": "Chhatrapati Shivaji Maharaj"
+  },
+  "quote": {
+    "title": "Get an Instant Quotation",
+    "subtitle": "Tell us your journey plan and we'll send a clear estimate.",
+    "pickup": "Pickup Location",
+    "pickupPlaceholder": "e.g. Nanded Railway Station",
+    "destination": "Destination",
+    "destPlaceholder": "e.g. Shirdi / Pune / Hyderabad",
+    "date": "Travel Date",
+    "passengers": "Passengers",
+    "service": "Service Type",
+    "vehicle": "Preferred Vehicle",
+    "mobile": "Mobile Number",
+    "btnSend": "Request Quote via WhatsApp",
+    "btnSave": "Submit Online Enquiry",
+    "note": "Our team reviews your route and sends the best quotation. Final price is confirmed directly by us."
+  },
+  "services": {
+    "title": "Our Travel Services",
+    "subtitle": "Complete transportation solutions from Nanded across Maharashtra and India.",
+    "items": {
+      "local": "Local Car Rental",
+      "outstation": "Outstation Trips",
+      "roundTrip": "One-Way & Round Trips",
+      "airport": "Airport & Railway Transfers",
+      "wedding": "Wedding Transportation",
+      "family": "Family Trips & Holidays",
+      "picnic": "Picnic Packages",
+      "tourism": "Tourism & Sightseeing",
+      "corporate": "Corporate Travel",
+      "custom": "Customized Travel Packages"
+    }
+  },
+  "fleet": {
+    "title": "Choose Your Vehicle",
+    "subtitle": "Well-maintained fleet of owned and trusted partner vehicles with experienced chauffeurs.",
+    "seats": "Seats",
+    "ac": "AC Available",
+    "luggage": "Luggage Space",
+    "requestBtn": "Request This Vehicle"
+  },
+  "destinations": {
+    "title": "Popular Journeys from Nanded",
+    "subtitle": "Frequent pilgrimage, heritage, and outstation routes booked by our clients.",
+    "viewPackages": "View Tour Packages"
+  },
+  "howItWorks": {
+    "title": "How Booking Works",
+    "subtitle": "Simple 4-step process with transparent pricing and personal coordination.",
+    "step1Title": "Send Your Request",
+    "step1Desc": "Fill our quick online form or WhatsApp us your travel plan.",
+    "step2Title": "Availability Check",
+    "step2Desc": "We assign the best matching vehicle from our fleet.",
+    "step3Title": "Receive Quotation",
+    "step3Desc": "You get a clear, all-inclusive price with zero hidden charges.",
+    "step4Title": "Booking Confirmed",
+    "step4Desc": "Driver details and confirmation are delivered immediately."
+  },
+  "gallery": {
+    "title": "Trips & Customer Moments",
+    "subtitle": "Real journey photos and feedback from travelers in Nanded."
+  },
+  "cta": {
+    "title": "Planning a trip? Tell us where you want to go.",
+    "subtitle": "We provide reliable, clean cars with polite drivers 24/7.",
+    "btn": "Book Your Ride Today"
+  },
+  "footer": {
+    "aboutText": "Car rental, taxi services, outstation travel, and tour packages based in Nanded, Maharashtra. Safe, punctual, and comfortable travel for every passenger.",
+    "contactHeader": "Contact",
+    "call": "Call 9325232301",
+    "whatsapp": "Chat on WhatsApp",
+    "exploreHeader": "Quick Links",
+    "rights": "All Rights Reserved."
+  },
+  "mobileBar": {
+    "call": "Call Now",
+    "whatsapp": "WhatsApp",
+    "book": "Book Ride"
+  }
+}
+
