@@ -29,7 +29,7 @@ export const Footer: React.FC<FooterProps> = ({ locale = "mr", dict }) => {
           {/* Brand Info with Official Logo */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3.5">
-              <div className="relative h-14 w-20 rounded-2xl overflow-hidden bg-white/95 p-1 border-2 border-brand-saf shadow-md shrink-0">
+              <div className="relative h-14 w-24 sm:w-26 rounded-2xl overflow-hidden bg-white p-1.5 border-2 border-brand-saf shadow-xl ring-2 ring-brand-gold/30 shrink-0">
                 <Image
                   src="/branding/logo.png"
                   alt="Swaraj Tours & Travels"

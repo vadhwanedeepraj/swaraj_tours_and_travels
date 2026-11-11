@@ -78,7 +78,7 @@ export default function AdminLayout({
             {/* Admin Header with Official Logo */}
             <div className="p-5 border-b border-white/10">
               <div className="flex items-center gap-3">
-                <div className="relative w-14 h-11 rounded-xl overflow-hidden bg-white p-0.5 shadow-md border border-white/20 shrink-0">
+                <div className="relative w-16 h-12 rounded-xl overflow-hidden bg-white p-1 shadow-md border border-white/30 shrink-0">
                   <Image
                     src="/branding/logo.png"
                     alt="Swaraj Logo"

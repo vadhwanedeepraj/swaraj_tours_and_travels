@@ -100,7 +100,7 @@ export const AdminAuthGuard: React.FC<AdminAuthGuardProps> = ({ children }) => {
         <div className="max-w-md w-full bg-white rounded-3xl p-8 sm:p-10 shadow-2xl relative z-10 border-4 border-brand-saf/30">
           {/* Header with Official Logo */}
           <div className="text-center space-y-3">
-            <div className="relative w-28 h-16 rounded-2xl overflow-hidden bg-white p-1 mx-auto shadow-md border-2 border-brand-saf/30">
+            <div className="relative w-36 h-20 mx-auto transition-transform hover:scale-105">
               <Image
                 src="/branding/logo.png"
                 alt="Swaraj Tours & Travels"

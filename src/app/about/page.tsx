@@ -289,6 +289,114 @@ export default function AboutPage() {
               </div>
             </div>
 
+            {/* Leadership & Founders Section with Logo */}
+            <div className="bg-white rounded-3xl p-6 sm:p-10 border border-brand-border shadow-lg">
+              <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
+                <div className="relative h-16 sm:h-20 w-28 sm:w-36 mx-auto">
+                  <Image
+                    src="/branding/logo.png"
+                    alt="Swaraj Tours & Travels Official Logo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <span className="text-xs font-bold text-brand-saf uppercase tracking-wider bg-brand-saf/10 px-4 py-1.5 rounded-full inline-block">
+                  {isMr ? "स्वराज ग्रुप नेतृत्व · Swaraj Group Leadership" : "Swaraj Group Leadership"}
+                </span>
+                <h2 className="text-2xl sm:text-4xl font-extrabold font-mr text-gray-900 mt-2">
+                  {isMr ? "संस्थापक व मार्गदर्शक नेतृत्व" : "Meet the Founders"}
+                </h2>
+                <p className="text-xs sm:text-sm text-gray-600 mt-1">
+                  {isMr
+                    ? "नांदेडच्या मातीतून सुरू झालेला एक आधुनिक व विश्वासू ट्रॅव्हल मोबिलिटी स्टार्टअप"
+                    : "A modern, customer-first travel mobility startup originating from Nanded, Maharashtra"}
+                </p>
+                <div className="w-16 h-1 bg-brand-saf2 mx-auto my-3 rounded-full" />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Founder: Shivraj Vadhwane */}
+                <div className="bg-gradient-to-br from-brand-tint/60 via-white to-white rounded-3xl p-6 sm:p-8 border-2 border-brand-saf/20 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all group">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-saf to-brand-saf2 text-white font-black text-2xl flex items-center justify-center shadow-md">
+                        SV
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-brand-saf uppercase tracking-wider font-mr">
+                          {isMr ? "संस्थापक (Founder)" : "Founder"}
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-black text-gray-900 font-mr">
+                          {isMr ? "शिवराज वाधवणे" : "Shivraj Vadhwane"}
+                        </h3>
+                        <p className="text-xs text-gray-500 font-medium">
+                          {isMr ? "स्वराज ग्रुप · स्वराज टुर्स अँड ट्रॅव्हल्स" : "Swaraj Group · Swaraj Tours & Travels"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="relative bg-white p-4 rounded-2xl border border-brand-border text-xs sm:text-sm text-gray-700 leading-relaxed italic shadow-inner">
+                      "{isMr
+                        ? "नांदेड व मराठवाड्यातील प्रत्येक कुटुंबाला सुरक्षित, विश्वासार्ह आणि वेळेवर सेवा देणे हेच आमचे कर्तव्य आहे. छत्रपती शिवरायांच्या आदर्शाने प्रेरित होऊन प्रामाणिक सेवा उभी करणे हा आमचा ध्यास आहे."
+                        : "Our primary mission is ensuring every family traveling from Nanded experiences absolute safety, punctuality, and transparent fares with cultural warmth and professional standards."}"
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      <span className="text-[11px] font-bold bg-white text-gray-700 px-3 py-1 rounded-full border border-gray-200">
+                        {isMr ? "👑 व्हिजन व ऑपरेशन्स" : "Fleet Operations"}
+                      </span>
+                      <span className="text-[11px] font-bold bg-white text-gray-700 px-3 py-1 rounded-full border border-gray-200">
+                        {isMr ? "🛡️ १००% प्रवासी सुरक्षा" : "Passenger Safety"}
+                      </span>
+                      <span className="text-[11px] font-bold bg-white text-gray-700 px-3 py-1 rounded-full border border-gray-200">
+                        {isMr ? "🤝 प्रादेशिक विश्वास" : "Regional Trust"}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Co-Founder: Deepraj Vadhwane */}
+                <div className="bg-gradient-to-br from-brand-tint/60 via-white to-white rounded-3xl p-6 sm:p-8 border-2 border-brand-saf/20 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all group">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-navy to-brand-saf text-white font-black text-2xl flex items-center justify-center shadow-md">
+                        DV
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-brand-saf uppercase tracking-wider font-mr">
+                          {isMr ? "सह-संस्थापक (Co-Founder)" : "Co-Founder"}
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-black text-gray-900 font-mr">
+                          {isMr ? "दीपराज वाधवणे" : "Deepraj Vadhwane"}
+                        </h3>
+                        <p className="text-xs text-gray-500 font-medium">
+                          {isMr ? "स्वराज ग्रुप · स्वराज टुर्स अँड ट्रॅव्हल्स" : "Swaraj Group · Swaraj Tours & Travels"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="relative bg-white p-4 rounded-2xl border border-brand-border text-xs sm:text-sm text-gray-700 leading-relaxed italic shadow-inner">
+                      "{isMr
+                        ? "आधुनिक तंत्रज्ञान, डिजिटल ऑटोमेशन आणि २४x७ तत्पर ग्राहकसेवेच्या मदतीने स्वराज टुर्स अँड ट्रॅव्हल्सला महाराष्ट्रातील आघाडीचा आधुनिक ट्रॅव्हल स्टार्टअप बनवण्याचा आमचा संकल्प आहे."
+                        : "Leveraging cutting-edge digital technology, instant WhatsApp dispatches, and 24/7 customer care to scale Swaraj Tours & Travels as a high-reliability modern travel startup."}"
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      <span className="text-[11px] font-bold bg-white text-gray-700 px-3 py-1 rounded-full border border-gray-200">
+                        {isMr ? "⚡ डिजिटल इनोव्हेशन" : "Digital Innovation"}
+                      </span>
+                      <span className="text-[11px] font-bold bg-white text-gray-700 px-3 py-1 rounded-full border border-gray-200">
+                        {isMr ? "🚀 आधुनिक स्टार्टअप मॉडेल" : "Startup Scaling"}
+                      </span>
+                      <span className="text-[11px] font-bold bg-white text-gray-700 px-3 py-1 rounded-full border border-gray-200">
+                        {isMr ? "📱 २४/७ स्मार्ट सपोर्ट" : "Instant Support"}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* CTA Section */}
             <div className="bg-gradient-to-r from-brand-dark to-brand-navy text-white rounded-3xl p-8 sm:p-12 text-center shadow-2xl relative overflow-hidden">
               <div className="relative z-10 max-w-2xl mx-auto space-y-4">

@@ -26,13 +26,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ locale = "mr", dict })
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           {/* Left Text & Call to Actions */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-saf/10 border border-brand-saf/20 text-brand-saf font-semibold text-xs sm:text-sm">
-              <MapPin className="w-4 h-4 text-brand-red" />
-              <span>
-                {isMr
-                  ? "एक स्वराज ग्रुप उपक्रम · संस्थापक: शिवराज व दीपराज वाधवणे"
-                  : "A Swaraj Group Enterprise · Founders: Shivraj & Deepraj Vadhwane"}
-              </span>
+            {/* Swaraj Group Emblem & Badge */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+              <div className="relative h-11 w-20 sm:h-12 sm:w-24 shrink-0 transition-transform hover:scale-105">
+                <Image
+                  src="/branding/logo.png"
+                  alt="Swaraj Tours & Travels Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-saf/10 border border-brand-saf/20 text-brand-saf font-bold text-xs sm:text-sm">
+                <MapPin className="w-4 h-4 text-brand-red shrink-0" />
+                <span>
+                  {isMr
+                    ? "एक स्वराज ग्रुप उपक्रम · संस्थापक: शिवराज व दीपराज वाधवणे"
+                    : "A Swaraj Group Enterprise · Founders: Shivraj & Deepraj Vadhwane"}
+                </span>
+              </div>
             </div>
 
             <h1 className="font-mr font-extrabold text-3xl sm:text-5xl lg:text-6xl text-brand-dark leading-[1.18] tracking-tight">
@@ -96,19 +108,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ locale = "mr", dict })
             </div>
           </div>
 
-          {/* Right Cultural Stage with Chhatrapati Shivaji Maharaj Frame & Official Logo Badge */}
+          {/* Right Cultural Stage with Chhatrapati Shivaji Maharaj Frame */}
           <div className="lg:col-span-5 flex justify-center items-end relative pt-6 lg:pt-0">
             <div className="relative flex items-end justify-center gap-3 sm:gap-4 max-w-xs sm:max-w-sm">
-              {/* Floating Official Brand Logo Badge */}
-              <div className="absolute -top-4 -right-3 sm:-right-4 z-20 w-16 h-12 sm:w-20 sm:h-14 rounded-2xl bg-white/95 p-1.5 shadow-2xl border-2 border-brand-saf ring-4 ring-brand-gold/30 flex items-center justify-center backdrop-blur-sm">
-                <Image
-                  src="/branding/logo.png"
-                  alt="Swaraj Tours & Travels Official Logo"
-                  fill
-                  className="object-contain p-0.5"
-                />
-              </div>
-
               <div className="w-56 sm:w-72 aspect-[3/4] rounded-t-[140px] rounded-b-2xl border-4 border-brand-gold ring-4 ring-brand-saf ring-offset-4 bg-gradient-to-b from-[#FFF5EB] via-[#FFE4CC] to-[#FFD2A8] shadow-2xl flex flex-col items-center justify-end text-center overflow-hidden relative group">
                 <Image
                   src="/branding/shivaji-maharaj.png"

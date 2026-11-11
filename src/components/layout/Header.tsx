@@ -51,21 +51,21 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Official Brand Logo & Name */}
-          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group py-1">
-            <div className="relative h-11 sm:h-13 w-16 sm:w-20 rounded-xl overflow-hidden bg-white p-0.5 border border-brand-saf/30 shadow-sm shrink-0 group-hover:border-brand-saf transition-all">
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3.5 group py-1">
+            <div className="relative h-12 sm:h-14 w-20 sm:w-24 shrink-0 transition-transform group-hover:scale-105 duration-300">
               <Image
                 src="/branding/logo.png"
                 alt="Swaraj Tours & Travels Logo"
                 fill
-                className="object-contain group-hover:scale-105 transition-transform"
+                className="object-contain"
                 priority
               />
             </div>
-            <div className="flex flex-col">
-              <span className="font-mr font-extrabold text-lg sm:text-2xl text-brand-saf tracking-tight group-hover:text-brand-red transition-colors leading-tight">
+            <div className="flex flex-col border-l-2 border-brand-saf/20 pl-2.5 sm:pl-3">
+              <span className="font-mr font-black text-lg sm:text-2xl text-brand-saf tracking-tight group-hover:text-brand-red transition-colors leading-tight">
                 {dict.brand.name}
               </span>
-              <span className="text-[10px] sm:text-[11px] font-semibold text-brand-muted tracking-wider uppercase">
+              <span className="text-[10px] sm:text-[11px] font-bold text-gray-500 tracking-wider uppercase mt-0.5">
                 {dict.brand.sub}
               </span>
             </div>
