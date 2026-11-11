@@ -1,7 +1,9 @@
 import React from "react";
 import { MessageSquare, Car, FileText, CheckCircle2 } from "lucide-react";
+import { Locale } from "@/types";
 
 interface HowItWorksSectionProps {
+  locale?: Locale;
   dict: {
     howItWorks: {
       title: string;
@@ -18,28 +20,30 @@ interface HowItWorksSectionProps {
   };
 }
 
-export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ dict }) => {
+export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ locale = "mr", dict }) => {
+  const isMr = locale === "mr";
+
   const steps = [
     {
-      step: "१",
+      step: isMr ? "१" : "1",
       title: dict.howItWorks.step1Title,
       desc: dict.howItWorks.step1Desc,
       icon: MessageSquare,
     },
     {
-      step: "२",
+      step: isMr ? "२" : "2",
       title: dict.howItWorks.step2Title,
       desc: dict.howItWorks.step2Desc,
       icon: Car,
     },
     {
-      step: "३",
+      step: isMr ? "३" : "3",
       title: dict.howItWorks.step3Title,
       desc: dict.howItWorks.step3Desc,
       icon: FileText,
     },
     {
-      step: "४",
+      step: isMr ? "४" : "4",
       title: dict.howItWorks.step4Title,
       desc: dict.howItWorks.step4Desc,
       icon: CheckCircle2,
@@ -51,7 +55,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ dict }) =>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-xs font-bold text-brand-saf uppercase tracking-wider bg-brand-saf/10 px-3.5 py-1.5 rounded-full">
-            Transparent Booking Process
+            {isMr ? "पारदर्शक बुकिंग प्रक्रिया" : "Transparent Booking Process"}
           </span>
           <h2 className="mt-3 font-mr font-extrabold text-2xl sm:text-4xl text-gray-900 tracking-tight">
             {dict.howItWorks.title}
@@ -89,7 +93,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ dict }) =>
                 </div>
 
                 <div className="mt-6 pt-3 border-t border-gray-100 text-[11px] font-semibold text-brand-muted">
-                  पायरी {item.step} पूर्ण
+                  {isMr ? `पायरी ${item.step} पूर्ण` : `Step ${item.step} Completed`}
                 </div>
               </div>
             );
@@ -99,4 +103,3 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ dict }) =>
     </section>
   );
 };
-

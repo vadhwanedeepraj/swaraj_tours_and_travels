@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, Calendar, Users, MapPin, Navigation, Car, Phone, User, CheckCircle2 } from "lucide-react";
+import { Send, Calendar, MapPin, Navigation, Car, Phone, User, CheckCircle2 } from "lucide-react";
+import { Locale } from "@/types";
 import { formatWhatsAppUrl } from "@/lib/utils";
 import { submitBookingEnquiry } from "@/actions/bookings";
 
 interface QuickQuoteFormProps {
+  locale?: Locale;
   dict: {
     quote: {
       title: string;
@@ -25,7 +27,9 @@ interface QuickQuoteFormProps {
   };
 }
 
-export const QuickQuoteForm: React.FC<QuickQuoteFormProps> = ({ dict }) => {
+export const QuickQuoteForm: React.FC<QuickQuoteFormProps> = ({ locale = "mr", dict }) => {
+  const isMr = locale === "mr";
+
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
@@ -53,7 +57,7 @@ export const QuickQuoteForm: React.FC<QuickQuoteFormProps> = ({ dict }) => {
     // 1. Automatically save enquiry to database
     try {
       await submitBookingEnquiry({
-        fullName: formData.name.trim() || "वेबसाईट प्रवासी (Quick Lead)",
+        fullName: formData.name.trim() || (isMr ? "वेबसाईट प्रवासी (Quick Lead)" : "Website Customer"),
         mobile: formData.mobile.trim() || "9325232301",
         pickupLocation: formData.from,
         destination: formData.to,
@@ -79,12 +83,16 @@ export const QuickQuoteForm: React.FC<QuickQuoteFormProps> = ({ dict }) => {
 🚗 *Service:* ${formData.service}
 🚘 *Vehicle:* ${formData.vehiclePref}
 ---------------------------------------
-_Please provide the best quotation and driver availability for this trip._`;
+Please provide the best quotation and driver availability for this trip.`;
 
     const url = formatWhatsAppUrl("919325232301", message);
     window.open(url, "_blank", "noopener,noreferrer");
 
-    setSuccessNotice("तुमची चौकशी नोंदवली गेली आहे व WhatsApp उघडले आहे!");
+    setSuccessNotice(
+      isMr
+        ? "तुमची चौकशी नोंदवली गेली आहे व WhatsApp उघडले आहे!"
+        : "Your enquiry has been recorded and WhatsApp opened!"
+    );
     setTimeout(() => {
       setIsSubmitting(false);
       setSuccessNotice(null);
@@ -104,7 +112,10 @@ _Please provide the best quotation and driver availability for this trip._`;
             </p>
           </div>
           <div className="text-xs text-amber-200">
-            कॉल किंवा WhatsApp द्वारे झटपट कोटेशन उपलब्ध: <span className="font-bold text-white font-mono">+91 9325232301</span>
+            {isMr
+              ? "कॉल किंवा WhatsApp द्वारे झटपट कोटेशन उपलब्ध:"
+              : "Instant quotation available via Call or WhatsApp:"}{" "}
+            <span className="font-bold text-white font-mono">+91 9325232301</span>
           </div>
         </div>
 
@@ -114,14 +125,14 @@ _Please provide the best quotation and driver availability for this trip._`;
             <div className="space-y-1">
               <label className="flex items-center gap-1.5 text-xs font-bold text-amber-100">
                 <User className="w-3.5 h-3.5 text-brand-yellow" />
-                <span>तुमचे नाव</span>
+                <span>{isMr ? "तुमचे नाव" : "Your Name"}</span>
               </label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="उदा. राहुल पाटील"
+                placeholder={isMr ? "उदा. राहुल पाटील" : "e.g. Rahul Patil"}
                 className="w-full h-11 px-3.5 rounded-lg text-gray-900 bg-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-yellow border-0 shadow-inner"
               />
             </div>
@@ -130,7 +141,7 @@ _Please provide the best quotation and driver availability for this trip._`;
             <div className="space-y-1">
               <label className="flex items-center gap-1.5 text-xs font-bold text-amber-100">
                 <Phone className="w-3.5 h-3.5 text-brand-yellow" />
-                <span>मोबाईल नंबर *</span>
+                <span>{isMr ? "मोबाईल नंबर *" : "Mobile Number *"}</span>
               </label>
               <input
                 type="tel"
@@ -206,10 +217,18 @@ _Please provide the best quotation and driver availability for this trip._`;
                 onChange={handleChange}
                 className="w-full h-11 px-3 rounded-lg text-gray-900 bg-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-yellow border-0 shadow-inner"
               >
-                <option value="Sedan (Hyundai AURA)">Sedan (Hyundai AURA) — 🟢 उपलब्ध</option>
-                <option value="SUV (Maruti Ertiga)">SUV (Maruti Ertiga) — 🟢 उपलब्ध</option>
-                <option value="Luxury (Innova Crysta)">Luxury (Innova Crysta) — 🟡 मागणीनुसार</option>
-                <option value="Tempo Traveller (17 Seats)">Tempo Traveller (17 Seats)</option>
+                <option value="Sedan (Hyundai AURA)">
+                  {isMr ? "सेडान (ह्युंदाई ऑरा) — 🟢 उपलब्ध" : "Sedan (Hyundai AURA) — 🟢 Available"}
+                </option>
+                <option value="SUV (Maruti Ertiga)">
+                  {isMr ? "एसयूव्ही (मारुती अर्टिगा) — 🟢 उपलब्ध" : "SUV (Maruti Ertiga) — 🟢 Available"}
+                </option>
+                <option value="Luxury (Innova Crysta)">
+                  {isMr ? "लक्झरी (इनोव्हा क्रिस्टा) — 🟡 मागणीनुसार" : "Luxury (Innova Crysta) — 🟡 On Request"}
+                </option>
+                <option value="Tempo Traveller (17 Seats)">
+                  {isMr ? "टेम्पो ट्रॅव्हलर (१७ सीट्स)" : "Tempo Traveller (17 Seats)"}
+                </option>
               </select>
             </div>
           </div>

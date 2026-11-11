@@ -18,25 +18,46 @@ interface PageShellProps {
 }
 
 export const PageShell: React.FC<PageShellProps> = ({ children }) => {
-  const [locale, setLocale] = useState<Locale>("mr");
+  const [locale, setLocale] = useState<Locale>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const savedLocale = localStorage.getItem("swaraj_locale") as Locale;
+        if (savedLocale === "mr" || savedLocale === "en") {
+          return savedLocale;
+        }
+      } catch {
+        // Ignore
+      }
+    }
+    return "mr";
+  });
 
   useEffect(() => {
-    // Check if user previously selected language in localStorage
-    try {
-      const savedLocale = localStorage.getItem("swaraj_locale") as Locale;
-      if (savedLocale === "mr" || savedLocale === "en") {
-        setLocale(savedLocale);
+    const handleLocaleChange = () => {
+      try {
+        const savedLocale = localStorage.getItem("swaraj_locale") as Locale;
+        if (savedLocale === "mr" || savedLocale === "en") {
+          setLocale(savedLocale);
+        }
+      } catch {
+        // Ignore
       }
-    } catch {
-      // Ignore if localStorage unavailable
-    }
+    };
+
+    window.addEventListener("swaraj_locale_change", handleLocaleChange);
+    window.addEventListener("storage", handleLocaleChange);
+    return () => {
+      window.removeEventListener("swaraj_locale_change", handleLocaleChange);
+      window.removeEventListener("storage", handleLocaleChange);
+    };
   }, []);
 
   const toggleLocale = () => {
     setLocale((prev) => {
-      const next = prev === "mr" ? "en" : "mr";
+      const next: Locale = prev === "mr" ? "en" : "mr";
       try {
         localStorage.setItem("swaraj_locale", next);
+        window.dispatchEvent(new CustomEvent("swaraj_locale_change", { detail: next }));
       } catch {
         // Ignore
       }
@@ -48,16 +69,15 @@ export const PageShell: React.FC<PageShellProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <TopAnnounceBar bannerText={dict.topBanner} />
+      <TopAnnounceBar bannerText={dict.topBanner} locale={locale} />
       <Header
         currentLocale={locale}
         onToggleLocale={toggleLocale}
         dict={dict}
       />
       <main className="flex-grow">{children({ locale, dict, toggleLocale })}</main>
-      <Footer dict={dict} />
+      <Footer dict={dict} locale={locale} />
       <MobileStickyBar dict={dict} />
     </div>
   );
 };
-

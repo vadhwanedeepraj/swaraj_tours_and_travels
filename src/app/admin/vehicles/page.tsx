@@ -28,13 +28,16 @@ import {
   ArrowRight,
   ExternalLink,
   Info,
+  Upload,
 } from "lucide-react";
 import { Vehicle } from "@/types";
 
 const IMAGE_PRESETS = [
-  { label: "Sedan Car 1 (Aura/Dzire)", url: "/vehicles/car-1.jpeg" },
-  { label: "Ertiga SUV Car 2", url: "/vehicles/car-2.jpeg" },
-  { label: "Luxury Innova Car 3", url: "/vehicles/car-3.jpeg" },
+  { label: "Swift Dzire (नवीन)", url: "/vehicles/swift-dzire.png" },
+  { label: "Maruti Ertiga (नवीन)", url: "/vehicles/maruti-ertiga.avif" },
+  { label: "Hyundai Aura Sedan", url: "/vehicles/car-1.jpeg" },
+  { label: "Ertiga SUV (Car 2)", url: "/vehicles/car-2.jpeg" },
+  { label: "Innova Crysta (Car 3)", url: "/vehicles/car-3.jpeg" },
   { label: "Swaraj Banner & Fleet", url: "/branding/banner.jpeg" },
 ];
 
@@ -249,6 +252,25 @@ export default function VehiclesManagementPage() {
       ...formData,
       image: url,
     });
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 2.5 * 1024 * 1024) {
+      showFeedback("error", "कृपया २.५ MB पेक्षा लहान आकाराचा फोटो निवडा (Image size under 2.5MB).");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const dataUrl = event.target?.result as string;
+      if (dataUrl) {
+        handleAddImage(dataUrl);
+        showFeedback("success", "डिव्हाइसमधून फोटो यशस्वीरित्या जोडला!");
+      }
+    };
+    reader.readAsDataURL(file);
+    e.target.value = "";
   };
 
   // Save Add/Edit
@@ -906,22 +928,35 @@ export default function VehiclesManagementPage() {
                   </div>
                 </div>
 
-                {/* Custom Image URL Input */}
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={newImageUrl}
-                    onChange={(e) => setNewImageUrl(e.target.value)}
-                    placeholder="कस्टम इमेज लिंक टाका (उदा. /vehicles/car-1.jpeg किंवा URL)"
-                    className="flex-1 px-3 py-2 text-xs rounded-xl border border-gray-300 focus:border-brand-saf outline-none font-mono"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => handleAddImage(newImageUrl)}
-                    className="px-4 py-2 bg-gray-800 hover:bg-black text-white text-xs font-bold rounded-xl transition-colors shrink-0"
-                  >
-                    फोटो जोडा (Add)
-                  </button>
+                {/* Image Upload from Device & Custom Image URL Input */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <label className="flex items-center justify-center gap-2 px-3 py-2 bg-brand-saf/10 hover:bg-brand-saf/20 text-brand-saf font-bold text-xs rounded-xl border border-brand-saf/30 cursor-pointer transition-colors shadow-sm">
+                    <Upload className="w-3.5 h-3.5" />
+                    <span>डिव्हाइसमधून फोटो अपलोड करा (Upload File)</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+                  </label>
+
+                  <div className="flex gap-1.5">
+                    <input
+                      type="text"
+                      value={newImageUrl}
+                      onChange={(e) => setNewImageUrl(e.target.value)}
+                      placeholder="/vehicles/photo.png किंवा URL"
+                      className="flex-1 px-3 py-2 text-xs rounded-xl border border-gray-300 focus:border-brand-saf outline-none font-mono"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleAddImage(newImageUrl)}
+                      className="px-3.5 py-2 bg-gray-800 hover:bg-black text-white text-xs font-bold rounded-xl transition-colors shrink-0"
+                    >
+                      जोडा (Add)
+                    </button>
+                  </div>
                 </div>
 
                 {/* Visual Thumbnails of Selected Images */}

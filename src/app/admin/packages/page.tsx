@@ -19,10 +19,19 @@ import {
   MapPin,
   Car,
   ShieldCheck,
+  Upload,
 } from "lucide-react";
 import { TourPackage } from "@/types";
 
 const DEFAULT_PACKAGE_IMAGE = "/vehicles/car-1.jpeg";
+
+const PACKAGE_IMAGE_PRESETS = [
+  { label: "Swift Dzire", url: "/vehicles/swift-dzire.png" },
+  { label: "Maruti Ertiga", url: "/vehicles/maruti-ertiga.avif" },
+  { label: "Sedan Car 1", url: "/vehicles/car-1.jpeg" },
+  { label: "Innova Car 3", url: "/vehicles/car-3.jpeg" },
+  { label: "Swaraj Banner", url: "/branding/banner.jpeg" },
+];
 
 export default function PackagesManagementPage() {
   const [packages, setPackages] = useState<TourPackage[]>([]);
@@ -82,6 +91,25 @@ export default function PackagesManagementPage() {
   const showFeedback = (type: "success" | "error", message: string) => {
     setFeedback({ type, message });
     setTimeout(() => setFeedback(null), 4500);
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 2.5 * 1024 * 1024) {
+      showFeedback("error", "कृपया २.५ MB पेक्षा लहान आकाराचा फोटो निवडा.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const dataUrl = event.target?.result as string;
+      if (dataUrl) {
+        setFormData((prev) => ({ ...prev, heroImage: dataUrl }));
+        showFeedback("success", "पॅकेजचा फोटो यशस्वीरित्या जोडला!");
+      }
+    };
+    reader.readAsDataURL(file);
+    e.target.value = "";
   };
 
   const openAddModal = () => {
@@ -477,17 +505,52 @@ export default function PackagesManagementPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">
-                  फोटो लिंक (Hero Image URL)
-                </label>
-                <input
-                  type="text"
-                  value={formData.heroImage || ""}
-                  onChange={(e) => setFormData({ ...formData, heroImage: e.target.value })}
-                  placeholder="/vehicles/car-1.jpeg किंवा इमेज लिंक"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-brand-saf outline-none text-xs font-mono"
-                />
+              {/* Package Image Manager */}
+              <div className="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-gray-800">
+                    पॅकेजचा मुख्य फोटो (Package Hero Image)
+                  </label>
+                  <span className="text-[10px] text-gray-500">तयार फोटो किंवा डिव्हाइसमधून निवडा</span>
+                </div>
+
+                <div className="flex flex-wrap gap-1.5">
+                  {PACKAGE_IMAGE_PRESETS.map((p) => (
+                    <button
+                      type="button"
+                      key={p.url}
+                      onClick={() => setFormData({ ...formData, heroImage: p.url })}
+                      className={`text-[10px] font-bold px-2 py-1 rounded-lg border transition-all ${
+                        formData.heroImage === p.url
+                          ? "bg-brand-saf text-white border-brand-saf"
+                          : "bg-white text-gray-700 border-gray-200 hover:border-brand-saf"
+                      }`}
+                    >
+                      {p.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                  <label className="flex items-center justify-center gap-1.5 px-3 py-2 bg-brand-saf/10 hover:bg-brand-saf/20 text-brand-saf font-bold text-xs rounded-xl border border-brand-saf/30 cursor-pointer transition-colors">
+                    <Upload className="w-3.5 h-3.5" />
+                    <span>डिव्हाइसमधून फोटो निवडा</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+                  </label>
+
+                  <input
+                    type="text"
+                    value={formData.heroImage || ""}
+                    onChange={(e) => setFormData({ ...formData, heroImage: e.target.value })}
+                    placeholder="/vehicles/car-1.jpeg किंवा URL"
+                    className="w-full px-3 py-2 rounded-xl border border-gray-300 focus:border-brand-saf outline-none text-xs font-mono"
+                  />
+                </div>
               </div>
 
               <div>

@@ -4,16 +4,11 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Calendar,
-  Clock,
   Navigation,
   ArrowRight,
   CheckCircle2,
   PhoneCall,
   Sparkles,
-  MapPin,
-  Car,
-  ShieldCheck,
 } from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
 import { TOUR_PACKAGES } from "@/lib/data/packages";
@@ -37,15 +32,16 @@ export default function PackagesPage() {
   const filterTabs = [
     { key: "All", en: "All Packages", mr: "सर्व पॅकेजेस" },
     { key: "Pilgrimage", en: "Pilgrimage & Temples", mr: "तीर्थक्षेत्र दर्शन" },
-    { key: "Shaktipeeth", en: "Shaktipeeth", mr: "शक्तिपीठ" },
+    { key: "Shaktipeeth", en: "Shaktipeeth", mr: "शक्तिपीठ दर्शन" },
     { key: "Heritage", en: "Heritage & History", mr: "ऐतिहासिक पर्यटन" },
-    { key: "City Tour", en: "Outstation City", mr: "आंतरराज्य शहर" },
-    { key: "1-Day", en: "1-Day Trips", mr: "१-दिवसीय सहल" },
+    { key: "City Tour", en: "Outstation City", mr: "आंतरशहर प्रवास" },
+    { key: "1-Day", en: "1-Day Trips", mr: "१-दिवसीय सहली" },
   ];
 
   return (
     <PageShell>
       {({ locale }) => {
+        const isMr = locale === "mr";
         const filteredPackages = packagesList.filter((pkg) => {
           if (selectedFilter === "All") return true;
           if (selectedFilter === "1-Day") return pkg.durationDays === 1;
@@ -57,18 +53,18 @@ export default function PackagesPage() {
             {/* Header Banner */}
             <div className="text-center max-w-3xl mx-auto mb-10">
               <span className="text-xs font-bold text-brand-saf uppercase tracking-wider bg-brand-saf/10 px-4 py-1.5 rounded-full inline-block">
-                {locale === "mr"
+                {isMr
                   ? "नांदेडहून खास टूर पॅकेजेस"
                   : "Handcrafted Packages from Nanded"}
               </span>
               <h1 className="mt-3 font-mr font-extrabold text-3xl sm:text-5xl text-gray-900 tracking-tight">
-                {locale === "mr"
+                {isMr
                   ? "देवदर्शन, निसर्ग व ऐतिहासिक यात्रा"
                   : "Spiritual, Heritage & Family Tours"}
               </h1>
               <div className="w-20 h-1.5 bg-brand-saf2 mx-auto my-4 rounded-full" />
               <p className="text-base sm:text-lg text-gray-600 font-medium">
-                {locale === "mr"
+                {isMr
                   ? "शिर्डी, तुळजापूर, माहूरगड, संभाजीनगर, हैदराबाद व ज्योतिर्लिंग: तुमच्या कुटुंबासाठी घरापासून घरपोच सुरक्षित प्रवासाचे नियोजन."
                   : "Curated outstation itineraries with doorstep pickup in Nanded, comfortable AC vehicles, transparent billing, and polite drivers."}
               </p>
@@ -88,7 +84,7 @@ export default function PackagesPage() {
                         : "bg-white text-gray-700 border border-brand-border hover:border-brand-saf hover:text-brand-saf"
                     }`}
                   >
-                    {locale === "mr" ? tab.mr : tab.en}
+                    {isMr ? tab.mr : tab.en}
                   </button>
                 );
               })}
@@ -105,20 +101,24 @@ export default function PackagesPage() {
                   <div className="relative aspect-[16/10] bg-gray-100 overflow-hidden">
                     <Image
                       src={pkg.heroImage}
-                      alt={pkg.titleEn}
+                      alt={isMr ? pkg.titleMr : pkg.titleEn}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     <div className="absolute top-3 left-3 bg-brand-navy/85 backdrop-blur-sm text-white text-[11px] font-bold px-3 py-1 rounded-full shadow">
-                      {locale === "mr" ? pkg.categoryMr : pkg.category}
+                      {isMr ? pkg.categoryMr : pkg.category}
                     </div>
                     <div className="absolute top-3 right-3 bg-brand-saf text-white text-[11px] font-bold px-3 py-1 rounded-full shadow">
-                      {locale === "mr" ? pkg.durationMr : pkg.durationEn}
+                      {isMr ? pkg.durationMr : pkg.durationEn}
                     </div>
                     <div className="absolute bottom-3 left-3 bg-black/75 backdrop-blur-sm text-brand-yellow text-xs font-bold px-3 py-1 rounded-lg flex items-center gap-1.5">
                       <Navigation className="w-3.5 h-3.5 text-brand-saf2" />
-                      <span>~{pkg.distanceKm} km from Nanded</span>
+                      <span>
+                        {isMr
+                          ? `~${pkg.distanceKm} किमी (नांदेडहून)`
+                          : `~${pkg.distanceKm} km from Nanded`}
+                      </span>
                     </div>
                   </div>
 
@@ -126,16 +126,16 @@ export default function PackagesPage() {
                   <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                     <div>
                       <h2 className="font-mr font-extrabold text-xl text-gray-900 group-hover:text-brand-saf transition-colors leading-snug">
-                        {locale === "mr" ? pkg.titleMr : pkg.titleEn}
+                        {isMr ? pkg.titleMr : pkg.titleEn}
                       </h2>
                       <p className="text-xs text-gray-600 mt-2 line-clamp-3 leading-relaxed">
-                        {locale === "mr" ? pkg.overviewMr : pkg.overviewEn}
+                        {isMr ? pkg.overviewMr : pkg.overviewEn}
                       </p>
                     </div>
 
                     {/* Highlights List */}
                     <div className="space-y-1.5 pt-2 border-t border-gray-100 text-xs text-gray-700">
-                      {(locale === "mr" ? pkg.highlightsMr : pkg.highlightsEn)
+                      {(isMr ? pkg.highlightsMr : pkg.highlightsEn)
                         .slice(0, 3)
                         .map((h, i) => (
                           <div key={i} className="flex items-start gap-2">
@@ -149,14 +149,14 @@ export default function PackagesPage() {
                     <div className="pt-3 border-t border-gray-100">
                       <div className="flex items-baseline justify-between mb-3">
                         <span className="text-xs text-gray-500">
-                          {locale === "mr" ? "सुरुवातीचे भाडे (Sedan):" : "Starting from:"}
+                          {isMr ? "सुरुवातीचे भाडे (सेडान):" : "Starting from (Sedan):"}
                         </span>
                         <div className="text-right">
                           <span className="text-lg font-extrabold text-brand-saf">
                             ₹{pkg.startingPrice.toLocaleString("en-IN")}
                           </span>
                           <span className="text-[10px] text-gray-400 block font-normal">
-                            ({locale === "mr" ? "सर्व समावेशक पॅकेज" : "Est. Package"})
+                            ({isMr ? "सर्व-समावेशक पॅकेज" : "Est. Package"})
                           </span>
                         </div>
                       </div>
@@ -166,7 +166,7 @@ export default function PackagesPage() {
                           href={`/packages/${pkg.slug}`}
                           className="flex items-center justify-center gap-1 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold py-2.5 rounded-xl transition-colors text-center"
                         >
-                          <span>{locale === "mr" ? "आराखडा पहा" : "Itinerary"}</span>
+                          <span>{isMr ? "आराखडा पहा" : "Itinerary"}</span>
                           <ArrowRight className="w-3.5 h-3.5 text-brand-saf" />
                         </Link>
 
@@ -175,7 +175,7 @@ export default function PackagesPage() {
                           className="flex items-center justify-center gap-1 bg-brand-saf hover:bg-brand-red text-white text-xs font-bold py-2.5 rounded-xl shadow transition-all text-center"
                         >
                           <PhoneCall className="w-3.5 h-3.5" />
-                          <span>{locale === "mr" ? "बुक करा" : "Book Now"}</span>
+                          <span>{isMr ? "आत्ताच बुक करा" : "Book Now"}</span>
                         </Link>
                       </div>
                     </div>
@@ -188,15 +188,17 @@ export default function PackagesPage() {
             <div className="mt-16 bg-gradient-to-r from-brand-saf to-brand-saf2 text-white rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="max-w-xl text-center md:text-left">
                 <span className="text-xs font-bold text-brand-yellow uppercase tracking-wider bg-black/20 px-3 py-1 rounded-full">
-                  Custom Pilgrimage & Holiday Packages
+                  {isMr
+                    ? "सानुकूल तीर्थक्षेत्र व पर्यटन पॅकेजेस"
+                    : "Custom Pilgrimage & Holiday Packages"}
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-mr font-extrabold mt-3">
-                  {locale === "mr"
+                  {isMr
                     ? "तुमची स्वतःची सहल तुमच्या वेळेनुसार आखायची आहे?"
                     : "Need a Custom Tour Planned According to Your Schedule?"}
                 </h3>
                 <p className="text-xs sm:text-sm text-amber-100 mt-2 leading-relaxed">
-                  {locale === "mr"
+                  {isMr
                     ? "अष्टविनायक, शेगाव, तिरुपती, गोवा किंवा कोकण यात्रा: आम्ही तुमच्या बजेट व वाहनाच्या आवडीनुसार खास कोटेशन देतो."
                     : "Tell us your preferred stops, family group size, and dates. We will curate a tailor-made quotation within 15 minutes."}
                 </p>
@@ -209,7 +211,7 @@ export default function PackagesPage() {
                 >
                   <Sparkles className="w-4 h-4 text-brand-gold" />
                   <span>
-                    {locale === "mr"
+                    {isMr
                       ? "कस्टम पॅकेज विनंती पाठवा"
                       : "Request Custom Package"}
                   </span>
@@ -221,7 +223,7 @@ export default function PackagesPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-3.5 rounded-xl shadow transition-transform active:scale-95 text-sm"
                 >
-                  <span>WhatsApp: 9325232301</span>
+                  <span>WhatsApp: {isMr ? "९३२५२३२३०१" : "9325232301"}</span>
                 </a>
               </div>
             </div>
@@ -231,4 +233,3 @@ export default function PackagesPage() {
     </PageShell>
   );
 }
-

@@ -57,8 +57,9 @@
     "seats": "६+१ प्रवासी (6+1 Seats)",
     "ac": true,
     "luggage": "३ मोठी बॅग्ज + रूफ करिअर (Roof Carrier)",
-    "image": "/vehicles/car-2.jpeg",
+    "image": "/vehicles/maruti-ertiga.avif",
     "additionalImages": [
+      "/vehicles/maruti-ertiga.avif",
       "/vehicles/car-2.jpeg",
       "/branding/banner.jpeg"
     ],
@@ -238,42 +239,52 @@
     ]
   },
   {
-    "id": "v-1794333215157",
-    "slug": "hyundai-aura",
-    "name": "Hyundai Aura",
-    "marathiName": "Hyundai Aura",
-    "regNumber": "MH-26-AG-1503",
+    "id": "swift-dzire",
+    "slug": "swift-dzire",
+    "name": "Maruti Suzuki Swift Dzire",
+    "marathiName": "मारुती सुझुकी स्विफ्ट डिझायर (Swift Dzire)",
     "category": "Sedan",
+    "regNumber": "MH-26-BE-1007",
     "seats": "४+१ प्रवासी (4+1 Seats)",
     "ac": true,
-    "luggage": "२ मोठी बॅग्ज",
-    "image": "/vehicles/car-1.jpeg",
+    "luggage": "२ मोठी बॅग्ज + २ हँडबॅग्ज (2 Large Bags)",
+    "image": "/vehicles/swift-dzire.png",
     "additionalImages": [
-      "/vehicles/car-1.jpeg"
+      "/vehicles/swift-dzire.png",
+      "/vehicles/car-1.jpeg",
+      "/branding/banner.jpeg"
     ],
-    "descriptionEn": "Comfortable vehicle for local and outstation trips.",
-    "descriptionMr": "स्थानिक व आउटस्टेशन प्रवासासाठी आरामदायी गाडी.",
+    "descriptionEn": "Class-leading comfort, elegant interior styling, and outstanding fuel efficiency. Maruti Suzuki Swift Dzire offers whisper-quiet air-conditioned highway cruises and effortless city trips across Maharashtra.",
+    "descriptionMr": "आरामदायी, उत्कृष्ट मायलेज आणि देखणी रचना असणारी मारुती सुझुकी स्विफ्ट डिझायर (Swift Dzire) सेडान. पॉवरफुल वातानुकूलित केबिन, आरामदायी सीट्स आणि विशाल डिकीसह नांदेड ते महाराष्ट्रभर प्रवासासाठी उत्तम.",
     "ownership": "owned",
-    "ratePerKm": 12,
+    "ratePerKm": 11,
     "minKmPerDay": 300,
-    "driverAllowancePerDay": 200,
+    "driverAllowancePerDay": 300,
     "isAvailable": true,
     "status": "available",
     "featuresEn": [
-      "AC",
-      "Audio System",
-      "Clean Interiors"
+      "Chilled Air Conditioning & Climate Comfort",
+      "Ergonomic cushion seating with rear armrest",
+      "Digital stereo system with Bluetooth & AUX",
+      "Spacious boot for family luggage",
+      "Pristine sanitized cabin",
+      "Fastag enabled for express highway clearance"
     ],
     "featuresMr": [
-      "एसी",
-      "म्युझिक सिस्टीम",
-      "स्वच्छ केबिन"
+      "पॉवरफुल कुलिंग एसी (AC)",
+      "आरामदायी कुशन्ड सीट्स व मागील आर्मरेस्ट",
+      "म्युझिक सिस्टीम (Bluetooth/AUX)",
+      "कुटुंबाच्या सामानासाठी प्रशस्त बुट स्पेस",
+      "नियमित स्वच्छ व सॅनिटाईज केलेली गाडी",
+      "टोल नाक्यांवर फास्टॅगची सोय"
     ],
-    "bestForEn": "Family trips and tours.",
-    "bestForMr": "कौटुंबिक सहली आणि प्रवास.",
+    "bestForEn": "Small families (4 passengers), couples, corporate travel, Nanded airport & railway transfers.",
+    "bestForMr": "लहान कुटुंब (४ प्रवासी), व्यावसायिक प्रवास, नांदेड विमानतळ व रेल्वे स्टेशन पिकअप-ड्रॉप.",
     "popularRoutes": [
-      "Nanded Local",
-      "Nanded to Shirdi"
+      "Nanded to Pune",
+      "Nanded to Sambhajinagar",
+      "Nanded to Shirdi",
+      "Nanded Local Sightseeing"
     ]
   }
 ]

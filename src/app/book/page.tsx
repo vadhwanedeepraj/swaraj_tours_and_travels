@@ -16,7 +16,6 @@ import {
   MessageSquare,
   Sparkles,
   PhoneCall,
-  ArrowRight,
   ShieldCheck,
   X,
 } from "lucide-react";
@@ -24,8 +23,10 @@ import { PageShell } from "@/components/layout/PageShell";
 import { submitBookingEnquiry } from "@/actions/bookings";
 import { VEHICLES } from "@/lib/data/vehicles";
 import { TOUR_PACKAGES } from "@/lib/data/packages";
+import { formatVehicleName, formatVehicleSeats } from "@/lib/i18nHelpers";
 
 function BookingFormContent({ locale }: { locale: "mr" | "en" }) {
+  const isMr = locale === "mr";
   const searchParams = useSearchParams();
 
   // Form states
@@ -115,7 +116,7 @@ function BookingFormContent({ locale }: { locale: "mr" | "en" }) {
     const errors: Record<string, string> = {};
     if (!fullName.trim() || fullName.trim().length < 2) {
       errors.fullName =
-        locale === "mr"
+        isMr
           ? "कृपया पूर्ण नाव प्रविष्ट करा (किमान २ अक्षरे)."
           : "Please enter your full name (minimum 2 letters).";
     }
@@ -123,28 +124,28 @@ function BookingFormContent({ locale }: { locale: "mr" | "en" }) {
     const mobileRegex = /^[6-9]\d{9}$/;
     if (!mobileRegex.test(mobile.trim())) {
       errors.mobile =
-        locale === "mr"
+        isMr
           ? "कृपया वैध १०-अंकी भारतीय मोबाईल नंबर प्रविष्ट करा."
           : "Please enter a valid 10-digit Indian mobile number.";
     }
 
     if (!pickupLocation.trim()) {
       errors.pickupLocation =
-        locale === "mr"
+        isMr
           ? "पिकअप ठिकाण आवश्यक आहे."
           : "Pickup location is required.";
     }
 
     if (!destination.trim()) {
       errors.destination =
-        locale === "mr"
+        isMr
           ? "जाण्याचे ठिकाण आवश्यक आहे."
           : "Destination is required.";
     }
 
     if (!travelDate.trim()) {
       errors.travelDate =
-        locale === "mr"
+        isMr
           ? "प्रवासाची तारीख आवश्यक आहे."
           : "Travel date is required.";
     }
@@ -158,24 +159,24 @@ function BookingFormContent({ locale }: { locale: "mr" | "en" }) {
     const text = `*🚩 New Booking Request - Swaraj Tours & Travels*
 ---------------------------------------
 🔖 *Booking Ref:* ${refNumber || "Pending Confirmation"}
-👤 *Name:* ${fullName || "Traveler"}
+👤 *Name:* ${fullName || "Customer"}
 📱 *Mobile:* ${mobile || "Not specified"}
 📍 *Pickup:* ${pickupLocation || "Nanded"}
-🎯 *Destination:* ${destination || "Not specified"}
-📅 *Travel Date:* ${travelDate || "Immediate"}
+🏁 *Destination:* ${destination || "Not specified"}
+📅 *Travel Date:* ${travelDate || "To be decided"}
 ⏰ *Pickup Time:* ${pickupTime}
-🔄 *Return Date:* ${returnDate || "Single day / One way"}
+🔄 *Return Date:* ${returnDate || "One-way only"}
 👥 *Passengers:* ${passengers}
 🚗 *Vehicle:* ${vehiclePreference}
-🛠️ *Service:* ${serviceType}
+🏷️ *Service:* ${serviceType}
 📝 *Notes:* ${additionalRequirements || "None"}
 ---------------------------------------
-_Please confirm availability and share driver details._`;
+Please provide quotation and driver confirmation.`;
 
     return `https://wa.me/919325232301?text=${encodeURIComponent(text)}`;
   };
 
-  // Handle Server Form Submission
+  // Handle Form Submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setServerError(null);
@@ -185,14 +186,15 @@ _Please confirm availability and share driver details._`;
     }
 
     setIsSubmitting(true);
+
     try {
       const result = await submitBookingEnquiry({
-        fullName,
-        mobile,
-        pickupLocation,
-        destination,
+        fullName: fullName.trim(),
+        mobile: mobile.trim(),
+        pickupLocation: pickupLocation.trim(),
+        destination: destination.trim(),
         travelDate,
-        pickupTime,
+        pickupTime: pickupTime || undefined,
         returnDate: returnDate || undefined,
         passengers,
         vehiclePreference,
@@ -217,7 +219,7 @@ _Please confirm availability and share driver details._`;
       } else {
         setServerError(
           result.error ||
-            (locale === "mr"
+            (isMr
               ? "नोंदणी करताना त्रुटी आली. कृपया WhatsApp किंवा फोनद्वारे संपर्क साधा."
               : "Submission failed. Please connect via WhatsApp or Phone call.")
         );
@@ -225,7 +227,7 @@ _Please confirm availability and share driver details._`;
     } catch (err: any) {
       setServerError(
         err?.message ||
-          (locale === "mr"
+          (isMr
             ? "काहीतरी चूक झाली. कृपया पुन्हा प्रयत्न करा."
             : "An unexpected error occurred. Please try again.")
       );
@@ -239,16 +241,16 @@ _Please confirm availability and share driver details._`;
       {/* Title Header */}
       <div className="text-center max-w-3xl mx-auto mb-10">
         <span className="text-xs font-bold text-brand-saf uppercase tracking-wider bg-brand-saf/10 px-4 py-1.5 rounded-full inline-block">
-          {locale === "mr" ? "सुविधाजनक ऑनलाइन बुकिंग" : "Effortless Online Booking"}
+          {isMr ? "सुविधाजनक ऑनलाइन बुकिंग" : "Effortless Online Booking"}
         </span>
         <h1 className="mt-3 font-mr font-extrabold text-3xl sm:text-5xl text-gray-900 tracking-tight">
-          {locale === "mr"
+          {isMr
             ? "तुमचा प्रवास आत्ताच आरक्षित करा"
             : "Book Your Journey Today"}
         </h1>
         <div className="w-20 h-1.5 bg-brand-saf2 mx-auto my-4 rounded-full" />
         <p className="text-base sm:text-lg text-gray-600 font-medium">
-          {locale === "mr"
+          {isMr
             ? "नांदेडहून स्थानिक, आउटस्टेशन, किंवा टूर पॅकेजेससाठी अचूक कोटेशन मिळवा. कोणत्याही छुप्या शुल्काशिवाय प्रामाणिक सेवा."
             : "Instant transparent quotation for local transfers, outstation cab booking, and tour packages from Nanded with verified chauffeurs."}
         </p>
@@ -263,7 +265,7 @@ _Please confirm availability and share driver details._`;
             <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm flex items-start gap-3">
               <AlertCircle className="w-5 h-5 shrink-0 text-red-600 mt-0.5" />
               <div>
-                <p className="font-bold">{locale === "mr" ? "त्रुटी आली" : "Submission Error"}</p>
+                <p className="font-bold">{isMr ? "त्रुटी आली" : "Submission Error"}</p>
                 <p>{serverError}</p>
               </div>
             </div>
@@ -275,7 +277,7 @@ _Please confirm availability and share driver details._`;
               <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4 font-mr pb-2 border-b border-gray-100">
                 <User className="w-5 h-5 text-brand-saf" />
                 <span>
-                  {locale === "mr"
+                  {isMr
                     ? "१. संपर्क व प्रवाशांची माहिती"
                     : "1. Passenger & Contact Details"}
                 </span>
@@ -283,7 +285,7 @@ _Please confirm availability and share driver details._`;
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
-                    {locale === "mr" ? "तुमचे पूर्ण नाव *" : "Full Name *"}
+                    {isMr ? "तुमचे पूर्ण नाव *" : "Full Name *"}
                   </label>
                   <div className="relative">
                     <User className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
@@ -292,7 +294,7 @@ _Please confirm availability and share driver details._`;
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder={
-                        locale === "mr" ? "उदा. राहुल देशमुख" : "e.g. Rahul Deshmukh"
+                        isMr ? "उदा. राहुल देशमुख" : "e.g. Rahul Deshmukh"
                       }
                       className={`w-full pl-10 pr-3 py-2.5 rounded-xl border ${
                         clientErrors.fullName
@@ -308,7 +310,7 @@ _Please confirm availability and share driver details._`;
 
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
-                    {locale === "mr" ? "मोबाईल नंबर (WhatsApp) *" : "Mobile Number (WhatsApp) *"}
+                    {isMr ? "मोबाईल नंबर (WhatsApp) *" : "Mobile Number (WhatsApp) *"}
                   </label>
                   <div className="relative">
                     <Phone className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
@@ -318,7 +320,7 @@ _Please confirm availability and share driver details._`;
                       value={mobile}
                       onChange={(e) => setMobile(e.target.value.replace(/\D/g, ""))}
                       placeholder={
-                        locale === "mr" ? "उदा. 9325232301" : "e.g. 9325232301"
+                        isMr ? "उदा. 9325232301" : "e.g. 9325232301"
                       }
                       className={`w-full pl-10 pr-3 py-2.5 rounded-xl border ${
                         clientErrors.mobile
@@ -339,8 +341,8 @@ _Please confirm availability and share driver details._`;
               <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4 font-mr pb-2 border-b border-gray-100">
                 <MapPin className="w-5 h-5 text-brand-saf" />
                 <span>
-                  {locale === "mr"
-                    ? "२. प्रवासाचे ठिकाण (Route)"
+                  {isMr
+                    ? "२. प्रवासाचे ठिकाण"
                     : "2. Travel Route & Locations"}
                 </span>
               </h2>
@@ -349,14 +351,14 @@ _Please confirm availability and share driver details._`;
                 {/* Pickup Location */}
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
-                    {locale === "mr" ? "पिकअप ठिकाण (Pickup) *" : "Pickup Location *"}
+                    {isMr ? "पिकअप ठिकाण *" : "Pickup Location *"}
                   </label>
                   <input
                     type="text"
                     value={pickupLocation}
                     onChange={(e) => setPickupLocation(e.target.value)}
                     placeholder={
-                      locale === "mr"
+                      isMr
                         ? "उदा. नांदेड रेल्वे स्टेशन, तरोडा नाका"
                         : "e.g. Nanded Railway Station"
                     }
@@ -378,11 +380,11 @@ _Please confirm availability and share driver details._`;
                         key={idx}
                         type="button"
                         onClick={() =>
-                          setPickupLocation(locale === "mr" ? p.mr : p.en)
+                          setPickupLocation(isMr ? p.mr : p.en)
                         }
                         className="text-[11px] bg-brand-tint/70 hover:bg-brand-tint text-brand-saf px-2 py-0.5 rounded-md font-medium transition-colors"
                       >
-                        + {locale === "mr" ? p.mr : p.en}
+                        + {isMr ? p.mr : p.en}
                       </button>
                     ))}
                   </div>
@@ -391,8 +393,8 @@ _Please confirm availability and share driver details._`;
                 {/* Destination */}
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
-                    {locale === "mr"
-                      ? "जाण्याचे ठिकाण (Destination) *"
+                    {isMr
+                      ? "जाण्याचे ठिकाण *"
                       : "Drop / Destination *"}
                   </label>
                   <input
@@ -400,7 +402,7 @@ _Please confirm availability and share driver details._`;
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
                     placeholder={
-                      locale === "mr"
+                      isMr
                         ? "उदा. शिर्डी, तुळजापूर, पुणे, हैदराबाद"
                         : "e.g. Shirdi, Tuljapur, Hyderabad"
                     }
@@ -422,11 +424,11 @@ _Please confirm availability and share driver details._`;
                         key={idx}
                         type="button"
                         onClick={() =>
-                          setDestination(locale === "mr" ? d.mr : d.en)
+                          setDestination(isMr ? d.mr : d.en)
                         }
                         className="text-[11px] bg-brand-tint/70 hover:bg-brand-tint text-brand-saf px-2 py-0.5 rounded-md font-medium transition-colors"
                       >
-                        + {locale === "mr" ? d.mr : d.en}
+                        + {isMr ? d.mr : d.en}
                       </button>
                     ))}
                   </div>
@@ -439,7 +441,7 @@ _Please confirm availability and share driver details._`;
               <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4 font-mr pb-2 border-b border-gray-100">
                 <Calendar className="w-5 h-5 text-brand-saf" />
                 <span>
-                  {locale === "mr"
+                  {isMr
                     ? "३. प्रवासाची तारीख व वेळ"
                     : "3. Travel Schedule"}
                 </span>
@@ -448,7 +450,7 @@ _Please confirm availability and share driver details._`;
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
-                    {locale === "mr" ? "प्रवासाची तारीख *" : "Travel Date *"}
+                    {isMr ? "प्रवासाची तारीख *" : "Travel Date *"}
                   </label>
                   <input
                     type="date"
@@ -467,7 +469,7 @@ _Please confirm availability and share driver details._`;
 
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
-                    {locale === "mr" ? "पिकअप वेळ" : "Pickup Time"}
+                    {isMr ? "पिकअप वेळ" : "Pickup Time"}
                   </label>
                   <div className="relative">
                     <Clock className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
@@ -483,7 +485,7 @@ _Please confirm availability and share driver details._`;
 
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
-                    {locale === "mr" ? "परतीची तारीख (ऐच्छिक)" : "Return Date (Optional)"}
+                    {isMr ? "परतीची तारीख (ऐच्छिक)" : "Return Date (Optional)"}
                   </label>
                   <input
                     type="date"
@@ -492,7 +494,7 @@ _Please confirm availability and share driver details._`;
                     className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-brand-saf outline-none text-sm font-medium transition-all"
                   />
                   <span className="text-[10px] text-gray-500">
-                    {locale === "mr" ? "राउंड ट्रिप असल्यास निवडा" : "Leave blank for one-way"}
+                    {isMr ? "राउंड ट्रिप असल्यास निवडा" : "Leave blank for one-way"}
                   </span>
                 </div>
               </div>
@@ -503,7 +505,7 @@ _Please confirm availability and share driver details._`;
               <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4 font-mr pb-2 border-b border-gray-100">
                 <Car className="w-5 h-5 text-brand-saf" />
                 <span>
-                  {locale === "mr"
+                  {isMr
                     ? "४. गाडी व सेवेचा प्रकार"
                     : "4. Vehicle & Service Selection"}
                 </span>
@@ -512,7 +514,7 @@ _Please confirm availability and share driver details._`;
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
-                    {locale === "mr" ? "प्रवासी संख्या" : "Passengers"}
+                    {isMr ? "प्रवासी संख्या" : "Passengers"}
                   </label>
                   <div className="relative">
                     <Users className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
@@ -521,38 +523,60 @@ _Please confirm availability and share driver details._`;
                       onChange={(e) => setPassengers(e.target.value)}
                       className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-gray-300 focus:border-brand-saf outline-none text-sm font-medium bg-white transition-all"
                     >
-                      <option value="1–4">१ ते ४ प्रवासी (1–4 Persons)</option>
-                      <option value="5–7">५ ते ७ प्रवासी (5–7 Persons)</option>
-                      <option value="8–12">८ ते १२ प्रवासी (8–12 Persons)</option>
-                      <option value="13–17">१३ ते १७ प्रवासी (13–17 Persons)</option>
-                      <option value="18–32">१८ ते ३२ प्रवासी (18–32 Persons)</option>
+                      <option value="1–4">
+                        {isMr ? "१ ते ४ प्रवासी" : "1 to 4 Passengers"}
+                      </option>
+                      <option value="5–7">
+                        {isMr ? "५ ते ७ प्रवासी" : "5 to 7 Passengers"}
+                      </option>
+                      <option value="8–12">
+                        {isMr ? "८ ते १२ प्रवासी" : "8 to 12 Passengers"}
+                      </option>
+                      <option value="13–17">
+                        {isMr ? "१३ ते १७ प्रवासी" : "13 to 17 Passengers"}
+                      </option>
+                      <option value="18–32">
+                        {isMr ? "१८ ते ३२ प्रवासी" : "18 to 32 Passengers"}
+                      </option>
                     </select>
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
-                    {locale === "mr" ? "गाडीची पसंती" : "Vehicle Preference"}
+                    {isMr ? "गाडीची पसंती" : "Vehicle Preference"}
                   </label>
                   <select
                     value={vehiclePreference}
                     onChange={(e) => setVehiclePreference(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-brand-saf outline-none text-sm font-medium bg-white transition-all"
                   >
-                    {availableCars.map((v) => (
-                      <option key={v.id} value={v.name}>
-                        {v.name} ({v.seats}) {v.isAvailable ? "— 🟢 उपलब्ध (Available)" : "— 🟡 मागणीनुसार"}
-                      </option>
-                    ))}
+                    {availableCars.map((v) => {
+                      const vName = formatVehicleName(v, locale);
+                      const vSeats = formatVehicleSeats(v.seats, locale);
+                      const availTag = v.isAvailable
+                        ? isMr
+                          ? "🟢 उपलब्ध"
+                          : "🟢 Available"
+                        : isMr
+                        ? "🟡 मागणीनुसार उपलब्ध"
+                        : "🟡 On Request";
+
+                      return (
+                        <option key={v.id} value={v.name}>
+                          {vName} ({vSeats}) — {availTag}
+                        </option>
+                      );
+                    })}
                     <option value="Any Available Best Option">
-                      {locale === "mr" ? "कोणतीही उपलब्ध उत्तम गाडी" : "Best Available Vehicle"}
+                      {isMr ? "कोणतीही उपलब्ध उत्तम गाडी" : "Best Available Vehicle"}
                     </option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
-                    {locale === "mr" ? "सेवेचा प्रकार" : "Type of Service"}
+                    {isMr ? "सेवेचा प्रकार" : "Type of Service"}
                   </label>
                   <select
                     value={serviceType}
@@ -560,25 +584,25 @@ _Please confirm availability and share driver details._`;
                     className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-brand-saf outline-none text-sm font-medium bg-white transition-all"
                   >
                     <option value="Outstation Trips">
-                      {locale === "mr" ? "आउटस्टेशन प्रवास (Outstation)" : "Outstation Trips"}
+                      {isMr ? "आउटस्टेशन प्रवास" : "Outstation Trips"}
                     </option>
                     <option value="One-Way Drop">
-                      {locale === "mr" ? "वन-वे ड्रॉप (One-Way)" : "One-Way Drop"}
+                      {isMr ? "वन-वे प्रवास" : "One-Way Drop"}
                     </option>
                     <option value="Round Trip">
-                      {locale === "mr" ? "राउंड ट्रिप (Round Trip)" : "Round Trip"}
+                      {isMr ? "राउंड ट्रिप" : "Round Trip"}
                     </option>
                     <option value="Local Car Rental">
-                      {locale === "mr" ? "स्थानिक कार भाडे (Local City)" : "Local Car Rental"}
+                      {isMr ? "स्थानिक कार भाडे" : "Local Car Rental"}
                     </option>
                     <option value="Airport Transfer">
-                      {locale === "mr" ? "विमानतळ / रेल्वे ट्रान्सफर" : "Airport / Railway Transfer"}
+                      {isMr ? "विमानतळ / रेल्वे ट्रान्सफर" : "Airport / Railway Transfer"}
                     </option>
                     <option value="Wedding Transportation">
-                      {locale === "mr" ? "लग्नकार्यासाठी गाड्या" : "Wedding Transportation"}
+                      {isMr ? "लग्नकार्यासाठी गाड्या" : "Wedding Transportation"}
                     </option>
                     <option value="Customized Tour Package">
-                      {locale === "mr" ? "टूर पॅकेज (Tour Package)" : "Tour Package"}
+                      {isMr ? "सानुकूल टूर पॅकेज" : "Customized Tour Package"}
                     </option>
                   </select>
                 </div>
@@ -587,7 +611,7 @@ _Please confirm availability and share driver details._`;
               {/* Additional Requirements */}
               <div className="mt-4">
                 <label className="block text-xs font-bold text-gray-700 mb-1">
-                  {locale === "mr"
+                  {isMr
                     ? "काही विशेष आवश्यकता? (उदा. छतावर करिअर, वाटेतील थांबे, लहान बाळ)"
                     : "Additional Requirements (Roof carrier, baby seat, multiple stops, etc.)"}
                 </label>
@@ -598,7 +622,7 @@ _Please confirm availability and share driver details._`;
                     value={additionalRequirements}
                     onChange={(e) => setAdditionalRequirements(e.target.value)}
                     placeholder={
-                      locale === "mr"
+                      isMr
                         ? "उदा. शिर्डीसोबत शनी शिंगणापूरला जायचे आहे, ज्येष्ठ नागरिक सोबत आहेत."
                         : "e.g. Need halt at Shani Shingnapur, traveling with senior citizens."
                     }
@@ -619,14 +643,14 @@ _Please confirm availability and share driver details._`;
                   <span className="flex items-center gap-2">
                     <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     <span>
-                      {locale === "mr" ? "नोंदणी होत आहे..." : "Submitting..."}
+                      {isMr ? "नोंदणी होत आहे..." : "Submitting..."}
                     </span>
                   </span>
                 ) : (
                   <>
                     <Sparkles className="w-5 h-5 text-brand-yellow" />
                     <span>
-                      {locale === "mr"
+                      {isMr
                         ? "ऑनलाइन बुकिंग विनंती पाठवा"
                         : "Submit Booking Enquiry"}
                     </span>
@@ -642,7 +666,7 @@ _Please confirm availability and share driver details._`;
               >
                 <MessageSquare className="w-5 h-5" />
                 <span>
-                  {locale === "mr"
+                  {isMr
                     ? "WhatsApp वर त्वरित कोटेशन"
                     : "Instant WhatsApp Quote"}
                 </span>
@@ -651,7 +675,7 @@ _Please confirm availability and share driver details._`;
 
             <p className="text-center text-xs text-gray-500 pt-2">
               🔒{" "}
-              {locale === "mr"
+              {isMr
                 ? "तुमचा मोबाईल नंबर सुरक्षित राहील. आम्ही तात्काळ कॉल किंवा मेसेज करून अंतिम दर कळवू."
                 : "Your mobile number is 100% confidential. We never spam. Immediate response guaranteed."}
             </p>
@@ -665,15 +689,15 @@ _Please confirm availability and share driver details._`;
             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-saf/20 rounded-full blur-2xl" />
             <div className="relative z-10">
               <span className="text-xs font-bold text-brand-yellow tracking-wider uppercase block">
-                24/7 Helpline Nanded
+                {isMr ? "२४/७ हेल्पलाईन नांदेड" : "24/7 Helpline Nanded"}
               </span>
               <h3 className="text-xl font-bold font-mr mt-1">
-                {locale === "mr"
+                {isMr
                   ? "तात्काळ गाडी हवी आहे का?"
                   : "Need an Urgent Ride?"}
               </h3>
               <p className="text-xs text-gray-300 mt-2 leading-relaxed">
-                {locale === "mr"
+                {isMr
                   ? "फॉर्म न भरता थेट आमच्याशी संपर्क साधा. नांदेड रेल्वे स्टेशन किंवा विमानतळासाठी ५ मिनिटांत कन्फर्मेशन."
                   : "Skip the form and speak directly with our tour dispatcher. Instant booking for airport and railway station drops."}
               </p>
@@ -684,7 +708,9 @@ _Please confirm availability and share driver details._`;
                   className="flex items-center justify-center gap-3 bg-brand-saf hover:bg-brand-red text-white font-bold py-3 px-4 rounded-xl shadow transition-transform transform active:scale-95"
                 >
                   <PhoneCall className="w-4 h-4 text-brand-yellow" />
-                  <span>Call: +91 9325232301</span>
+                  <span>
+                    {isMr ? "कॉल करा: +९१ ९३२५२३२३०१" : "Call: +91 9325232301"}
+                  </span>
                 </a>
 
                 <a
@@ -694,7 +720,7 @@ _Please confirm availability and share driver details._`;
                   className="flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 px-4 rounded-xl text-sm transition-transform active:scale-95"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span>WhatsApp: 9325232301</span>
+                  <span>WhatsApp: {isMr ? "९३२५२३२३०१" : "9325232301"}</span>
                 </a>
               </div>
             </div>
@@ -705,7 +731,7 @@ _Please confirm availability and share driver details._`;
             <h4 className="font-mr font-bold text-base text-gray-900 mb-3 flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-brand-saf" />
               <span>
-                {locale === "mr"
+                {isMr
                   ? "स्वराज ट्रॅव्हल्सची ५ वैशिष्ट्ये"
                   : "The Swaraj Travel Promise"}
               </span>
@@ -714,7 +740,7 @@ _Please confirm availability and share driver details._`;
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
-                  {locale === "mr"
+                  {isMr
                     ? "१००% पारदर्शक दर – कोणतेही छुपे शुल्क नाही."
                     : "Transparent Pricing – Zero hidden charges or surprise tolls."}
                 </span>
@@ -722,7 +748,7 @@ _Please confirm availability and share driver details._`;
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
-                  {locale === "mr"
+                  {isMr
                     ? "वेळेवर हजर – प्रवाशांना कधीही वाट पाहावी लागत नाही."
                     : "Zero Waiting – Cab arrives at pickup location 10 mins early."}
                 </span>
@@ -730,7 +756,7 @@ _Please confirm availability and share driver details._`;
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
-                  {locale === "mr"
+                  {isMr
                     ? "स्थानिक अनुभवी चालक – सुरक्षित व सौम्य ड्रायव्हिंग."
                     : "Polite Local Chauffeurs – Police verified, safe highway driving."}
                 </span>
@@ -738,7 +764,7 @@ _Please confirm availability and share driver details._`;
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
-                  {locale === "mr"
+                  {isMr
                     ? "सॅनिटाईज व वातानुकूलित (AC) सुस्थितीतील गाड्या."
                     : "Spotlessly Clean & Chilled AC vehicles on every booking."}
                 </span>
@@ -746,7 +772,7 @@ _Please confirm availability and share driver details._`;
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
-                  {locale === "mr"
+                  {isMr
                     ? "२४ तास ग्राहक मदत केंद्र व थेट समन्वय."
                     : "24/7 Helpline coordination throughout your highway travel."}
                 </span>
@@ -773,11 +799,11 @@ _Please confirm availability and share driver details._`;
               </div>
 
               <span className="text-xs font-bold text-brand-saf uppercase tracking-wider bg-brand-tint px-3 py-1 rounded-full inline-block">
-                {locale === "mr" ? "बुकिंग नोंदणी यशस्वी" : "Enquiry Received"}
+                {isMr ? "बुकिंग नोंदणी यशस्वी" : "Enquiry Received"}
               </span>
 
               <h3 className="text-2xl font-mr font-extrabold text-gray-900">
-                {locale === "mr"
+                {isMr
                   ? "धन्यवाद! तुमची विनंती नोंदवली गेली आहे."
                   : "Thank You! Your Enquiry is Confirmed."}
               </h3>
@@ -785,34 +811,34 @@ _Please confirm availability and share driver details._`;
               <div className="bg-brand-tint/50 border border-brand-border p-4 rounded-2xl text-left text-xs space-y-1.5 font-medium text-gray-700">
                 <div className="flex justify-between border-b border-brand-border pb-1">
                   <span className="text-gray-500 font-normal">
-                    {locale === "mr" ? "नोंदणी क्रमांक (Ref No):" : "Booking Reference:"}
+                    {isMr ? "नोंदणी क्रमांक:" : "Booking Reference:"}
                   </span>
                   <span className="font-bold text-brand-saf text-sm">
                     {bookingResult.bookingNumber}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">{locale === "mr" ? "प्रवासी नाव:" : "Name:"}</span>
+                  <span className="text-gray-500">{isMr ? "प्रवासी नाव:" : "Name:"}</span>
                   <span className="font-bold">{fullName}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">{locale === "mr" ? "रूट:" : "Route:"}</span>
+                  <span className="text-gray-500">{isMr ? "रूट:" : "Route:"}</span>
                   <span className="font-bold text-right truncate max-w-[200px]">
                     {pickupLocation} ➔ {destination}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">{locale === "mr" ? "तारीख:" : "Date:"}</span>
+                  <span className="text-gray-500">{isMr ? "तारीख:" : "Date:"}</span>
                   <span className="font-bold">{travelDate}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-500">{locale === "mr" ? "गाडी:" : "Vehicle:"}</span>
+                  <span className="text-gray-500">{isMr ? "गाडी:" : "Vehicle:"}</span>
                   <span className="font-bold">{vehiclePreference}</span>
                 </div>
               </div>
 
               <p className="text-xs text-gray-600 leading-relaxed">
-                {locale === "mr"
+                {isMr
                   ? "आमची टीम पुढील १५ मिनिटांत तुमच्याशी संपर्क साधेल किंवा खालील बटण दाबून WhatsApp वर थेट कन्फर्मेशन मिळवा."
                   : "Our team will reach out within 15 minutes. You can also click below to confirm immediately on WhatsApp."}
               </p>
@@ -828,7 +854,7 @@ _Please confirm availability and share driver details._`;
                 >
                   <MessageSquare className="w-5 h-5" />
                   <span>
-                    {locale === "mr"
+                    {isMr
                       ? "WhatsApp वर तात्काळ कन्फर्म करा"
                       : "Confirm Directly on WhatsApp"}
                   </span>
@@ -839,7 +865,7 @@ _Please confirm availability and share driver details._`;
                   onClick={() => setBookingResult(null)}
                   className="w-full py-2.5 text-xs text-gray-600 hover:text-gray-900 font-bold"
                 >
-                  {locale === "mr" ? "बंद करा (Close)" : "Close"}
+                  {isMr ? "बंद करा" : "Close"}
                 </button>
               </div>
             </div>
@@ -867,4 +893,3 @@ export default function BookPage() {
     </PageShell>
   );
 }
-
