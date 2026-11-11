@@ -289,9 +289,9 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Leadership & Founders Section with Logo */}
-            <div className="bg-white rounded-3xl p-6 sm:p-10 border border-brand-border shadow-lg">
-              <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
+            {/* Leadership Spotlight: Founder Shivraj Vadhwane & Built by Deepraj Vadhwane */}
+            <div className="bg-white rounded-3xl p-6 sm:p-10 border border-brand-border shadow-lg space-y-8">
+              <div className="text-center max-w-2xl mx-auto space-y-3">
                 <div className="relative h-16 sm:h-20 w-28 sm:w-36 mx-auto">
                   <Image
                     src="/branding/logo.png"
@@ -304,94 +304,88 @@ export default function AboutPage() {
                   {isMr ? "स्वराज ग्रुप नेतृत्व · Swaraj Group Leadership" : "Swaraj Group Leadership"}
                 </span>
                 <h2 className="text-2xl sm:text-4xl font-extrabold font-mr text-gray-900 mt-2">
-                  {isMr ? "संस्थापक व मार्गदर्शक नेतृत्व" : "Meet the Founders"}
+                  {isMr ? "संस्थापक व मार्गदर्शक नेतृत्व" : "Founder & Visionary Leadership"}
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">
                   {isMr
-                    ? "नांदेडच्या मातीतून सुरू झालेला एक आधुनिक व विश्वासू ट्रॅव्हल मोबिलिटी स्टार्टअप"
-                    : "A modern, customer-first travel mobility startup originating from Nanded, Maharashtra"}
+                    ? "नांदेडच्या मातीतून उभा राहिलेला एक अग्रगण्य व विश्वासू ट्रॅव्हल मोबिलिटी ब्रँड"
+                    : "A leading, customer-first travel mobility brand originating from Nanded, Maharashtra"}
                 </p>
                 <div className="w-16 h-1 bg-brand-saf2 mx-auto my-3 rounded-full" />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Founder: Shivraj Vadhwane */}
-                <div className="bg-gradient-to-br from-brand-tint/60 via-white to-white rounded-3xl p-6 sm:p-8 border-2 border-brand-saf/20 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all group">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-saf to-brand-saf2 text-white font-black text-2xl flex items-center justify-center shadow-md">
-                        SV
+              {/* Highlighted Founder Card: Shivraj Vadhwane */}
+              <div className="max-w-4xl mx-auto bg-gradient-to-br from-brand-tint/70 via-white to-brand-tint/30 rounded-3xl p-7 sm:p-10 border-2 border-brand-saf/30 shadow-md hover:shadow-xl transition-all">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                  {/* Founder Emblem Avatar */}
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-br from-brand-saf via-brand-saf2 to-brand-red text-white font-black text-3xl sm:text-4xl flex items-center justify-center shadow-xl ring-4 ring-brand-gold/40 shrink-0">
+                    SV
+                  </div>
+
+                  <div className="space-y-4 text-center sm:text-left flex-1">
+                    <div>
+                      <div className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-saf uppercase tracking-wider font-mr bg-white px-3 py-1 rounded-full border border-brand-saf/30 shadow-sm">
+                        <span>👑</span>
+                        <span>{isMr ? "संस्थापक व प्रमुख संचालक (Founder & Director)" : "Founder & Managing Director"}</span>
                       </div>
-                      <div>
-                        <div className="text-xs font-bold text-brand-saf uppercase tracking-wider font-mr">
-                          {isMr ? "संस्थापक (Founder)" : "Founder"}
-                        </div>
-                        <h3 className="text-xl sm:text-2xl font-black text-gray-900 font-mr">
-                          {isMr ? "शिवराज वाधवणे" : "Shivraj Vadhwane"}
-                        </h3>
-                        <p className="text-xs text-gray-500 font-medium">
-                          {isMr ? "स्वराज ग्रुप · स्वराज टुर्स अँड ट्रॅव्हल्स" : "Swaraj Group · Swaraj Tours & Travels"}
-                        </p>
-                      </div>
+                      <h3 className="text-2xl sm:text-3xl font-black text-gray-900 font-mr mt-2">
+                        {isMr ? "शिवराज वाधवणे" : "Shivraj Vadhwane"}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-gray-600 font-semibold mt-0.5">
+                        {isMr ? "स्वराज ग्रुप व स्वराज टुर्स अँड ट्रॅव्हल्स, नांदेड" : "Swaraj Group & Swaraj Tours & Travels, Nanded"}
+                      </p>
                     </div>
 
-                    <div className="relative bg-white p-4 rounded-2xl border border-brand-border text-xs sm:text-sm text-gray-700 leading-relaxed italic shadow-inner">
+                    <div className="relative bg-white p-5 rounded-2xl border border-brand-border text-xs sm:text-sm text-gray-700 leading-relaxed italic shadow-inner">
                       "{isMr
-                        ? "नांदेड व मराठवाड्यातील प्रत्येक कुटुंबाला सुरक्षित, विश्वासार्ह आणि वेळेवर सेवा देणे हेच आमचे कर्तव्य आहे. छत्रपती शिवरायांच्या आदर्शाने प्रेरित होऊन प्रामाणिक सेवा उभी करणे हा आमचा ध्यास आहे."
-                        : "Our primary mission is ensuring every family traveling from Nanded experiences absolute safety, punctuality, and transparent fares with cultural warmth and professional standards."}"
+                        ? "नांदेड व मराठवाड्यातील प्रत्येक कुटुंबाला, भाविकांना व प्रवाशांना १००% सुरक्षित, विश्वासार्ह, सन्माननीय आणि पारदर्शक प्रवास सेवा देणे हेच आमचे प्रथम कर्तव्य आहे. छत्रपती शिवरायांच्या आदर्श नीतिमूल्यांनी प्रेरित होऊन प्रामाणिक सेवा व वेळेची अचूकता राखणे हा आमचा दृढ निश्चय आहे."
+                        : "Our primary mission is ensuring every pilgrim, family, and traveler journeys with dignity, punctuality, and uncompromised safety across Maharashtra and beyond, rooted in trust and transparent service."}"
                     </div>
 
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      <span className="text-[11px] font-bold bg-white text-gray-700 px-3 py-1 rounded-full border border-gray-200">
-                        {isMr ? "👑 व्हिजन व ऑपरेशन्स" : "Fleet Operations"}
+                    <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-1">
+                      <span className="text-[11px] font-bold bg-white text-gray-800 px-3 py-1.5 rounded-full border border-gray-200 shadow-sm">
+                        👑 {isMr ? "व्हिजन व फ्लीट ऑपरेशन्स" : "Fleet Operations & Vision"}
                       </span>
-                      <span className="text-[11px] font-bold bg-white text-gray-700 px-3 py-1 rounded-full border border-gray-200">
-                        {isMr ? "🛡️ १००% प्रवासी सुरक्षा" : "Passenger Safety"}
+                      <span className="text-[11px] font-bold bg-white text-gray-800 px-3 py-1.5 rounded-full border border-gray-200 shadow-sm">
+                        🛡️ {isMr ? "१००% प्रवासी सुरक्षा" : "Passenger Safety Protocol"}
                       </span>
-                      <span className="text-[11px] font-bold bg-white text-gray-700 px-3 py-1 rounded-full border border-gray-200">
-                        {isMr ? "🤝 प्रादेशिक विश्वास" : "Regional Trust"}
+                      <span className="text-[11px] font-bold bg-white text-gray-800 px-3 py-1.5 rounded-full border border-gray-200 shadow-sm">
+                        🤝 {isMr ? "मराठवाड्याचा विश्वास" : "Regional Trust"}
+                      </span>
+                      <span className="text-[11px] font-bold bg-white text-gray-800 px-3 py-1.5 rounded-full border border-gray-200 shadow-sm">
+                        ⏰ {isMr ? "२४/७ अखंड सेवा" : "24/7 Availability"}
                       </span>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                {/* Co-Founder: Deepraj Vadhwane */}
-                <div className="bg-gradient-to-br from-brand-tint/60 via-white to-white rounded-3xl p-6 sm:p-8 border-2 border-brand-saf/20 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all group">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-navy to-brand-saf text-white font-black text-2xl flex items-center justify-center shadow-md">
-                        DV
-                      </div>
-                      <div>
-                        <div className="text-xs font-bold text-brand-saf uppercase tracking-wider font-mr">
-                          {isMr ? "सह-संस्थापक (Co-Founder)" : "Co-Founder"}
-                        </div>
-                        <h3 className="text-xl sm:text-2xl font-black text-gray-900 font-mr">
-                          {isMr ? "दीपराज वाधवणे" : "Deepraj Vadhwane"}
-                        </h3>
-                        <p className="text-xs text-gray-500 font-medium">
-                          {isMr ? "स्वराज ग्रुप · स्वराज टुर्स अँड ट्रॅव्हल्स" : "Swaraj Group · Swaraj Tours & Travels"}
-                        </p>
-                      </div>
+              {/* Dedicated Engineering & Platform Build Credit: Deepraj Vadhwane */}
+              <div className="max-w-4xl mx-auto pt-4">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-gradient-to-r from-gray-900 via-[#142B59] to-[#0E1D3A] text-white rounded-2xl p-4 sm:p-6 shadow-md border border-white/10">
+                  <div className="flex items-center gap-4 text-center sm:text-left">
+                    <div className="w-12 h-12 rounded-xl bg-brand-saf text-white flex items-center justify-center font-black text-lg shadow-md shrink-0">
+                      DV
                     </div>
+                    <div>
+                      <span className="text-[10px] font-bold text-brand-yellow uppercase tracking-widest block font-mono">
+                        {isMr ? "⚡ डिजिटल प्लॅटफॉर्म निर्मिती · Platform Architecture" : "Platform Architecture & Engineering"}
+                      </span>
+                      <h4 className="text-base sm:text-lg font-bold text-white mt-0.5">
+                        {isMr
+                          ? "दीपराज वाधवणे द्वारे विकसित (Built by Deepraj Vadhwane)"
+                          : "Engineered & Built by Deepraj Vadhwane"}
+                      </h4>
+                      <p className="text-xs text-gray-300 mt-0.5">
+                        {isMr
+                          ? "आधुनिक तंत्रज्ञान, डिजिटल बुकिंग व २४x७ ग्राहक अनुभव प्लॅटफॉर्म"
+                          : "Full-Stack Travel Mobility System & Digital Customer Experience"}
+                      </p>
+                    </div>
+                  </div>
 
-                    <div className="relative bg-white p-4 rounded-2xl border border-brand-border text-xs sm:text-sm text-gray-700 leading-relaxed italic shadow-inner">
-                      "{isMr
-                        ? "आधुनिक तंत्रज्ञान, डिजिटल ऑटोमेशन आणि २४x७ तत्पर ग्राहकसेवेच्या मदतीने स्वराज टुर्स अँड ट्रॅव्हल्सला महाराष्ट्रातील आघाडीचा आधुनिक ट्रॅव्हल स्टार्टअप बनवण्याचा आमचा संकल्प आहे."
-                        : "Leveraging cutting-edge digital technology, instant WhatsApp dispatches, and 24/7 customer care to scale Swaraj Tours & Travels as a high-reliability modern travel startup."}"
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      <span className="text-[11px] font-bold bg-white text-gray-700 px-3 py-1 rounded-full border border-gray-200">
-                        {isMr ? "⚡ डिजिटल इनोव्हेशन" : "Digital Innovation"}
-                      </span>
-                      <span className="text-[11px] font-bold bg-white text-gray-700 px-3 py-1 rounded-full border border-gray-200">
-                        {isMr ? "🚀 आधुनिक स्टार्टअप मॉडेल" : "Startup Scaling"}
-                      </span>
-                      <span className="text-[11px] font-bold bg-white text-gray-700 px-3 py-1 rounded-full border border-gray-200">
-                        {isMr ? "📱 २४/७ स्मार्ट सपोर्ट" : "Instant Support"}
-                      </span>
-                    </div>
+                  <div className="text-xs font-semibold bg-white/10 px-4 py-2 rounded-xl border border-white/10 text-amber-200 whitespace-nowrap">
+                    🚀 {isMr ? "आधुनिक ट्रॅव्हल स्टार्टअप" : "Modern Mobility Startup"}
                   </div>
                 </div>
               </div>

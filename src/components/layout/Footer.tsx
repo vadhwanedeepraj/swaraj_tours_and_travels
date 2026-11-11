@@ -42,7 +42,7 @@ export const Footer: React.FC<FooterProps> = ({ locale = "mr", dict }) => {
                   {dict.brand.name}
                 </h3>
                 <span className="text-xs font-semibold text-brand-saf2 block">
-                  A Swaraj Group Enterprise · Nanded
+                  {isMr ? "एक स्वराज ग्रुप उपक्रम · संस्थापक: शिवराज वाधवणे" : "A Swaraj Group Enterprise · Founder: Shivraj Vadhwane"}
                 </span>
               </div>
             </div>
@@ -153,6 +153,9 @@ export const Footer: React.FC<FooterProps> = ({ locale = "mr", dict }) => {
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-3">
           <div>
             © {new Date().getFullYear()} {isMr ? "स्वराज टुर्स अँड ट्रॅव्हल्स" : "Swaraj Tours & Travels"}. {dict.footer.rights}
+            <span className="block sm:inline sm:ml-2 text-gray-500 text-[11px]">
+              · {isMr ? "प्लॅटफॉर्म निर्मिती: दीपराज वाधवणे" : "Built by Deepraj Vadhwane"}
+            </span>
           </div>
           <div className="flex items-center gap-3 text-brand-saf2/90 font-medium">
             <span>

@@ -349,8 +349,8 @@ Please respond on WhatsApp.`;
                       </span>
                       <div className="text-xs text-brand-saf font-bold mt-0.5 font-mr">
                         {isMr
-                          ? "संस्थापक: शिवराज वाधवणे · सह-संस्थापक: दीपराज वाधवणे"
-                          : "Founder: Shivraj Vadhwane · Co-Founder: Deepraj Vadhwane"}
+                          ? "संस्थापक: शिवराज वाधवणे (Founder) · तंत्रज्ञान निर्मिती: दीपराज वाधवणे (Built by Deepraj Vadhwane)"
+                          : "Founder: Shivraj Vadhwane · Built by Deepraj Vadhwane"}
                       </div>
                     </div>
                   </div>

@@ -96,7 +96,7 @@ export default function AdminLayout({
                 </div>
               </div>
               <div className="text-[10px] text-amber-200/90 font-mono mt-2">
-                Founders: Shivraj & Deepraj Vadhwane
+                Founder: Shivraj Vadhwane · Built by Deepraj Vadhwane
               </div>
               <div className="mt-2 text-[10px] bg-brand-saf/30 text-amber-200 px-2 py-0.5 rounded font-mono font-bold inline-block">
                 👑 मालक अधिकृत (Owner Mode)

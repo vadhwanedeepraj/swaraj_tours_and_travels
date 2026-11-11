@@ -41,8 +41,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ locale = "mr", dict })
                 <MapPin className="w-4 h-4 text-brand-red shrink-0" />
                 <span>
                   {isMr
-                    ? "एक स्वराज ग्रुप उपक्रम · संस्थापक: शिवराज व दीपराज वाधवणे"
-                    : "A Swaraj Group Enterprise · Founders: Shivraj & Deepraj Vadhwane"}
+                    ? "एक स्वराज ग्रुप उपक्रम · संस्थापक: शिवराज वाधवणे"
+                    : "A Swaraj Group Enterprise · Founder: Shivraj Vadhwane"}
                 </span>
               </div>
             </div>
