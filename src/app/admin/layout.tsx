@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -74,14 +75,28 @@ export default function AdminLayout({
         {/* Sidebar */}
         <aside className="w-full md:w-64 bg-[#142B59] text-white flex flex-col justify-between shrink-0 shadow-lg">
           <div>
-            {/* Admin Header */}
+            {/* Admin Header with Official Logo */}
             <div className="p-5 border-b border-white/10">
-              <div className="flex items-center gap-2 text-brand-yellow font-extrabold text-base">
-                <Shield className="w-5 h-5 text-brand-saf2" />
-                <span>स्वराज ॲडमिन पॅनेल</span>
+              <div className="flex items-center gap-3">
+                <div className="relative w-14 h-11 rounded-xl overflow-hidden bg-white p-0.5 shadow-md border border-white/20 shrink-0">
+                  <Image
+                    src="/branding/logo.png"
+                    alt="Swaraj Logo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <div className="text-brand-yellow font-extrabold text-sm leading-tight">
+                    स्वराज ग्रुप ॲडमिन
+                  </div>
+                  <div className="text-[11px] text-gray-300">
+                    Swaraj Tours & Travels
+                  </div>
+                </div>
               </div>
-              <div className="text-xs text-gray-300 mt-1">
-                Swaraj Tours & Travels · Nanded
+              <div className="text-[10px] text-amber-200/90 font-mono mt-2">
+                Founders: Shivraj & Deepraj Vadhwane
               </div>
               <div className="mt-2 text-[10px] bg-brand-saf/30 text-amber-200 px-2 py-0.5 rounded font-mono font-bold inline-block">
                 👑 मालक अधिकृत (Owner Mode)

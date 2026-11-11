@@ -50,21 +50,22 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-2 border-brand-saf2 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Brand Logo with Chhatrapati Shivaji Maharaj Emblem */}
-          <Link href="/" className="flex items-center gap-2.5 group py-1">
-            <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-brand-gold shadow-md shrink-0 ring-2 ring-brand-saf/30">
+          {/* Official Brand Logo & Name */}
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group py-1">
+            <div className="relative h-11 sm:h-13 w-16 sm:w-20 rounded-xl overflow-hidden bg-white p-0.5 border border-brand-saf/30 shadow-sm shrink-0 group-hover:border-brand-saf transition-all">
               <Image
-                src="/branding/shivaji-maharaj.png"
-                alt="Chhatrapati Shivaji Maharaj"
+                src="/branding/logo.png"
+                alt="Swaraj Tours & Travels Logo"
                 fill
-                className="object-cover object-top group-hover:scale-105 transition-transform"
+                className="object-contain group-hover:scale-105 transition-transform"
+                priority
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-mr font-extrabold text-xl sm:text-2xl text-brand-saf tracking-tight group-hover:text-brand-red transition-colors leading-tight">
+              <span className="font-mr font-extrabold text-lg sm:text-2xl text-brand-saf tracking-tight group-hover:text-brand-red transition-colors leading-tight">
                 {dict.brand.name}
               </span>
-              <span className="text-[11px] font-semibold text-brand-muted tracking-wider uppercase">
+              <span className="text-[10px] sm:text-[11px] font-semibold text-brand-muted tracking-wider uppercase">
                 {dict.brand.sub}
               </span>
             </div>

@@ -46,6 +46,11 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
+  icons: {
+    icon: "/branding/logo.png",
+    shortcut: "/branding/logo.png",
+    apple: "/branding/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -58,6 +63,7 @@ export default function RootLayout({
     "@type": "TravelAgency",
     "name": "Swaraj Tours & Travels",
     "alternateName": "स्वराज टुर्स अँड ट्रॅव्हल्स",
+    "logo": "https://swarajtravels.in/branding/logo.png",
     "telephone": "+919325232301",
     "url": "https://swarajtravels.in",
     "image": "https://swarajtravels.in/branding/banner.jpeg",

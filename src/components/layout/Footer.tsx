@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, MessageSquare, MapPin, ShieldCheck, Lock } from "lucide-react";
 import { Locale } from "@/types";
 
@@ -25,11 +26,26 @@ export const Footer: React.FC<FooterProps> = ({ locale = "mr", dict }) => {
     <footer id="contact" className="bg-[#1a0c05] text-[#e8cdb6] pt-14 pb-24 md:pb-14 border-t-4 border-brand-saf">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
-          {/* Brand Info */}
+          {/* Brand Info with Official Logo */}
           <div className="md:col-span-5 space-y-4">
-            <h3 className="font-mr font-extrabold text-2xl text-white tracking-wide">
-              {dict.brand.name}
-            </h3>
+            <div className="flex items-center gap-3.5">
+              <div className="relative h-14 w-20 rounded-2xl overflow-hidden bg-white/95 p-1 border-2 border-brand-saf shadow-md shrink-0">
+                <Image
+                  src="/branding/logo.png"
+                  alt="Swaraj Tours & Travels"
+                  fill
+                  className="object-contain p-0.5"
+                />
+              </div>
+              <div>
+                <h3 className="font-mr font-extrabold text-2xl text-white tracking-wide">
+                  {dict.brand.name}
+                </h3>
+                <span className="text-xs font-semibold text-brand-saf2 block">
+                  A Swaraj Group Enterprise · Nanded
+                </span>
+              </div>
+            </div>
             <p className="text-sm text-gray-300 leading-relaxed max-w-md">
               {dict.footer.aboutText}
             </p>

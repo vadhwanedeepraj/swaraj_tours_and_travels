@@ -12,6 +12,7 @@ import {
   Send,
   CheckCircle2,
   PhoneCall,
+  Building2,
 } from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
 import { CONTACT_FAQS } from "@/lib/data/gallery";
@@ -335,6 +336,25 @@ Please respond on WhatsApp.`;
                 </div>
 
                 <div className="space-y-4 text-xs sm:text-sm text-gray-700">
+                  <div className="flex items-start gap-3">
+                    <Building2 className="w-5 h-5 text-brand-saf shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="block text-gray-900">
+                        {isMr ? "संस्था व ब्रँड:" : "Organization & Brand:"}
+                      </strong>
+                      <span className="text-gray-700">
+                        {isMr
+                          ? "स्वराज टुर्स अँड ट्रॅव्हल्स (एक स्वराज ग्रुप उपक्रम)"
+                          : "Swaraj Tours & Travels (A Swaraj Group Enterprise)"}
+                      </span>
+                      <div className="text-xs text-brand-saf font-bold mt-0.5 font-mr">
+                        {isMr
+                          ? "संस्थापक: शिवराज वाधवणे · सह-संस्थापक: दीपराज वाधवणे"
+                          : "Founder: Shivraj Vadhwane · Co-Founder: Deepraj Vadhwane"}
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-brand-saf shrink-0 mt-0.5" />
                     <div>

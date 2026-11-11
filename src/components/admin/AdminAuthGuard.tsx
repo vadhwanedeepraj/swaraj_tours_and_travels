@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ShieldCheck,
   Lock,
@@ -97,10 +98,16 @@ export const AdminAuthGuard: React.FC<AdminAuthGuardProps> = ({ children }) => {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-yellow/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-md w-full bg-white rounded-3xl p-8 sm:p-10 shadow-2xl relative z-10 border-4 border-brand-saf/30">
-          {/* Header */}
+          {/* Header with Official Logo */}
           <div className="text-center space-y-3">
-            <div className="w-16 h-16 rounded-2xl bg-brand-saf/10 text-brand-saf flex items-center justify-center mx-auto shadow-inner">
-              <ShieldCheck className="w-9 h-9" />
+            <div className="relative w-28 h-16 rounded-2xl overflow-hidden bg-white p-1 mx-auto shadow-md border-2 border-brand-saf/30">
+              <Image
+                src="/branding/logo.png"
+                alt="Swaraj Tours & Travels"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
 
             <div>
